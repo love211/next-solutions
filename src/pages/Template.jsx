@@ -1,25 +1,25 @@
 import { useLocation, useParams } from "react-router";
-import Card1 from "../Cards/Card1";
-import Card2 from "../Cards/Card2";
-import Card3 from "../Cards/Card3";
-import Card5 from "../components/cards/Card5";
-import Card6 from "../components/cards/Card6";
-import Card4 from "../components/cards/Card4";
+
+import DigitalCard1 from "../digitalCards/DigitalCard1";
+import DigitalCard2 from "../digitalCards/DigitalCard2";
+import DigitalCard3 from "../digitalCards/DigitalCard3";
+import DigitalCard4 from "../digitalCards/DigitalCard4";
 import PYCard from "../components/cards/PiCard";
+import Card3 from "../Cards/Card3"
 const Template = () => {
   const cardId = useParams();
   const { pathname } = useLocation();
-  console.log("pathname", pathname, cardId);
 
   let cardToRender = {
-    1: <Card5 />,
-    2: <Card1 />,
-    3: <Card2 />,
-    4: <Card3 />,
-    5: <PYCard />,
+    1: <DigitalCard3 />,
+    2: <DigitalCard4 />,
+    3: <DigitalCard2 />,
+    4: <DigitalCard1 />,
+    // 5: <Card3 />,
+
   };
   return (
-    <div className="flex justify-center items-center h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 ... ">
+    <div className="flex justify-center items-center w-full">
       {cardToRender[cardId[1]]}
     </div>
   );
