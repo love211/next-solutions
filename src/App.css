@@ -23,3 +23,23 @@ align-items: flex-start;
 background-repeat: no-repeat;
 background-size: cover;
 }
+
+.gradient-bg{
+  background-image: url('../src//assets/Vector1.png');
+
+}
+
+
+.bg-cardTech {
+  background-image: url(./assets/cardTech.png);
+  width: 24.375rem;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.gradient-text {
+  background-clip: text;
+  -webkit-background-clip: text;
+  background-image: linear-gradient(180deg, #C871E6, #6BF6CE);
+  color: transparent;
+}
