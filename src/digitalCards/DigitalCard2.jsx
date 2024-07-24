@@ -18,21 +18,21 @@ const DigitalCard2 = () => {
               className=" w-[13.125rem] h-[13.125rem]  rounded-full border-[4px]"
             />
           </div>
-          <div>
-            <div className="gradient-bg h-[6.4rem] relative  text-white rounded-lg p-4 w-[19.4rem] ">
+          <div className="w-full">
+            <div className="gradient-bg h-[6.4rem] relative  text-white rounded-lg p-4 md:w-[19.4rem] ">
               <div className="text-center">
                 <div className="text-xl font-bold">Helen Wilson</div>
                 <div className="text-sm">Marketing Manager</div>
               </div>
             </div>
-            <div className="mt-4 bg-gray-800 text-white rounded-lg p-4 w-[19.4rem] flex flex-col items-center gap-3">
+            <div className="mt-4 bg-gray-800 text-white rounded-lg p-4 md:w-[19.4rem] flex flex-col items-center gap-3">
               <h4 className="font-semibold">About Me</h4>
               <p className="font-light text-base w-52">
-                I’m a highly skilled marketing profession with over 7 years of
+                I'm a highly skilled marketing profession with over 7 years of
                 industry experience.
               </p>
             </div>
-            <div className="mt-4 bg-gray-800 text-white rounded-lg p-4 w-[19.4rem]">
+            <div className="mt-4 bg-gray-800 text-white rounded-lg p-4 md:w-[19.4rem]">
               <div className="flex items-center mb-2 gap-3">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -107,3 +107,4 @@ const DigitalCard2 = () => {
 };
 
 export default DigitalCard2;
+

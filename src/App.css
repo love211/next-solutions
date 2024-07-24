@@ -1,4 +1,17 @@
-.slick-prev , .slick-next{
+
+body{
+  background-image: radial-gradient(
+    86.45% 86.43% at 44.84% 49.96%,
+    #abd7d7 31.6%,
+    #cb7fed 100%
+  );
+  height: 100vh;
+}
+.root{
+  height: 100%;
+}
+.slick-prev,
+.slick-next {
   background-color: green !important;
   border-radius: 10px !important ;
 }
@@ -6,29 +19,26 @@
 .mock-up-1{
   background-image: url('../src//assets/mock3.jpg');
   display: flex;
-width: 24.375rem;
-flex-direction: column;
-align-items: flex-start;
-background-repeat: no-repeat;
-background-size: cover;
+  width: 24.375rem;
+  flex-direction: column;
+  align-items: flex-start;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-
-.mock-up-2{
-  background-image: url('../src//assets/mock2.png');
+.mock-up-2 {
+  background-image: url("../src//assets/mock2.png");
   display: flex;
-width: 24.375rem;
-flex-direction: column;
-align-items: flex-start;
-background-repeat: no-repeat;
-background-size: cover;
+  width: 24.375rem;
+  flex-direction: column;
+  align-items: flex-start;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-.gradient-bg{
-  background-image: url('../src//assets/Vector1.png');
-
+.gradient-bg {
+  background-image: url("../src//assets/Vector1.png");
 }
-
 
 .bg-cardTech {
   background-image: url(./assets/CardTechBg.jpg);
@@ -40,7 +50,7 @@ background-size: cover;
 .gradient-text {
   background-clip: text;
   -webkit-background-clip: text;
-  background-image: linear-gradient(180deg, #C871E6, #6BF6CE);
+  background-image: linear-gradient(180deg, #c871e6, #6bf6ce);
   color: transparent;
 }
 
@@ -53,3 +63,12 @@ background-size: cover;
 .hide-scrollbar::-webkit-scrollbar {
   display: none; /* Chrome, Safari, and Opera */
 }
+.bg-home {
+  background-image: radial-gradient(
+    86.45% 86.43% at 44.84% 49.96%,
+    #abd7d7 31.6%,
+    #cb7fed 100%
+  );
+}
+
+

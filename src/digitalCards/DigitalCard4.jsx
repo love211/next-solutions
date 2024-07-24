@@ -1,26 +1,28 @@
-import React from 'react'
+import React from "react";
 import img2 from "../assets/aCard.png";
 import img3 from "../assets/men.png";
 import frame1 from "../assets/frame1.png";
 import frame2 from "../assets/frame2.png";
 import frame3 from "../assets/frame3.png";
+import MobileWrapper from "./MobileWrapper";
 
 const DigitalCard4 = () => {
   return (
-    <div className=" flex justify-center items-center w-full h-[100vh]">
-      <div className="">
-        <div className="w-[359.40px] bg-black">
+    <div className="flex h-screen justify-center items-center w-full ">
+      {/* <div className="h-full w-full"> */}
+      <MobileWrapper>
+        <div className="w-[359.40px] bg-black h-fit">
           <div className="absolute left-0 w-full h-full flex flex-col items-center justify-center">
             <div className="absolute top-[7.5%]">
               <img src={img3} />
             </div>
-            <div className="flex flex-col items-center justify-center bg-white bg-opacity-10 mt-28  ">
+            <div className="flex flex-col lg:w-[359.40px] w-[65%] items-center justify-center bg-white bg-opacity-10 mt-[10rem] lg:mt-7 ">
               <span className="text-2xl font-bold gradient-text">
                 Johnathan Doe
               </span>
               <span className="text-white text-base">Marketing Expert</span>
               <br />
-              <span className="text-white text-base text-center w-[50%]">
+              <span className="text-white text-base text-center w-full">
                 I’m a highly skilled marketing profession with over 7 years of
                 industry experience.
               </span>
@@ -46,9 +48,10 @@ const DigitalCard4 = () => {
             alt="Profile"
           />
         </div>
-      </div>
-  </div>
-  )
-}
+      </MobileWrapper>
+      {/* </div> */}
+    </div>
+  );
+};
 
-export default DigitalCard4
+export default DigitalCard4;
