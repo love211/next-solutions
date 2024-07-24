@@ -3,3 +3,23 @@
   border-radius: 10px !important ;
 }
 
+.mock-up-1{
+  background-image: url('../src//assets/mock1.jpg');
+  display: flex;
+width: 24.375rem;
+flex-direction: column;
+align-items: flex-start;
+background-repeat: no-repeat;
+background-size: cover;
+}
+
+
+.mock-up-2{
+  background-image: url('../src//assets/mock2.png');
+  display: flex;
+width: 24.375rem;
+flex-direction: column;
+align-items: flex-start;
+background-repeat: no-repeat;
+background-size: cover;
+}
