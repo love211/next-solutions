@@ -8,8 +8,7 @@ import MobileWrapper from "./MobileWrapper";
 
 const DigitalCard4 = () => {
   return (
-    <div className="flex h-screen justify-center items-center w-full ">
-      {/* <div className="h-full w-full"> */}
+    <div className="flex xl:h-full justify-center items-center w-full ">
       <MobileWrapper>
         <div className="w-[359.40px] bg-black h-fit">
           <div className="absolute left-0 w-full h-full flex flex-col items-center justify-center">
@@ -23,7 +22,7 @@ const DigitalCard4 = () => {
               <span className="text-white text-base">Marketing Expert</span>
               <br />
               <span className="text-white text-base text-center w-full">
-                I’m a highly skilled marketing profession with over 7 years of
+                I'm a highly skilled marketing profession with over 7 years of
                 industry experience.
               </span>
             </div>
@@ -49,7 +48,6 @@ const DigitalCard4 = () => {
           />
         </div>
       </MobileWrapper>
-      {/* </div> */}
     </div>
   );
 };

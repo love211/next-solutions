@@ -1,23 +1,22 @@
-
-body{
+body {
   background-image: radial-gradient(
     86.45% 86.43% at 44.84% 49.96%,
     #abd7d7 31.6%,
     #cb7fed 100%
   );
+}
+#root {
   height: 100vh;
 }
-.root{
-  height: 100%;
-}
+
 .slick-prev,
 .slick-next {
   background-color: green !important;
   border-radius: 10px !important ;
 }
 
-.mock-up-1{
-  background-image: url('../src//assets/mock3.jpg');
+.mock-up-1 {
+  background-image: url("../src//assets/mock3.jpg");
   display: flex;
   width: 24.375rem;
   flex-direction: column;
@@ -46,14 +45,12 @@ body{
   background-size: cover;
 }
 
-
 .gradient-text {
   background-clip: text;
   -webkit-background-clip: text;
   background-image: linear-gradient(180deg, #c871e6, #6bf6ce);
   color: transparent;
 }
-
 
 .hide-scrollbar {
   scrollbar-width: none; /* Firefox */
@@ -70,5 +67,3 @@ body{
     #cb7fed 100%
   );
 }
-
-

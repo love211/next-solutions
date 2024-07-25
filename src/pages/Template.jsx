@@ -5,7 +5,8 @@ import DigitalCard2 from "../digitalCards/DigitalCard2";
 import DigitalCard3 from "../digitalCards/DigitalCard3";
 import DigitalCard4 from "../digitalCards/DigitalCard4";
 import PYCard from "../components/cards/PiCard";
-import Card3 from "../Cards/Card3"
+import Card3 from "../Cards/Card3";
+import IndividualCardLayout from "../components/TemplateLayout";
 const Template = () => {
   const cardId = useParams();
   const { pathname } = useLocation();
@@ -16,12 +17,7 @@ const Template = () => {
     3: <DigitalCard2 />,
     4: <DigitalCard1 />,
     // 5: <Card3 />,
-
   };
-  return (
-    <div className="flex justify-center items-center w-full">
-      {cardToRender[cardId[1]]}
-    </div>
-  );
+  return <IndividualCardLayout>{cardToRender[cardId[1]]}</IndividualCardLayout>;
 };
 export default Template;

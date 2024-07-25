@@ -5,10 +5,10 @@ import card1 from "../assets/41.png";
 import card2 from "../assets/image2.png";
 import card3 from "../assets/imageslide2.png";
 import card4 from "../assets/image4.png";
-import card5 from "../assets/image5.png";
 import { useNavigate } from "react-router";
 
-let slideCss = "h-[33.625rem] w-[18.625rem] px-4 cursor-pointer";
+let slideCss =
+  "h-auto xl:h-[33.625rem] w-[18.625rem] px-2 md:px-4 cursor-pointer";
 const CardTemplate = () => {
   const navigate = useNavigate();
   const settings = {
