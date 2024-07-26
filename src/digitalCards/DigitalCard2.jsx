@@ -1,16 +1,19 @@
 import React from "react";
 import MobileWrapper from "./MobileWrapper";
+import { DrawerDialogDemo } from "@/components/dialog/AddTemplateDialog";
+import { handleOpenLink } from "./CheckCard";
 
 const DigitalCard2 = () => {
   return (
     <div className="w-screen h-screen flex items-center justify-center bg-white ">
       <MobileWrapper>
         <div
-          className="relative w-full max-w-[24.75rem]  flex flex-col  gap-[3.18rem]
-     py-[4rem] mock-up-1 bg-black
-     px-4 pt-20 pb-4
-     "
+          className="relative w-full max-w-[24.75rem]  flex flex-col gap-[3.18rem]
+          py-[4rem] mock-up-1 bg-black px-4 pt-20 pb-4"
         >
+          <div className="flex justify-end self-end">
+            <DrawerDialogDemo />
+          </div>
           <div className=" flex flex-col pb-8 relative top-[2.6rem] left-[3.3rem]">
             <img
               src="https://i.pinimg.com/564x/c6/b4/ec/c6b4ec629a470bd2eb1d3328226495cc.jpg"
@@ -71,7 +74,14 @@ const DigitalCard2 = () => {
                     stroke-linejoin="round"
                   />
                 </svg>
-                <span>helen@nextsolution.com</span>
+                <span
+                  className="cursor-pointer"
+                  onClick={() =>
+                    handleOpenLink("https://www.nextsolution.net/")
+                  }
+                >
+                  helen@nextsolution.com
+                </span>
               </div>
               <div className="flex items-center gap-3">
                 <svg
@@ -96,7 +106,14 @@ const DigitalCard2 = () => {
                     stroke-linejoin="round"
                   />
                 </svg>
-                <span>nextsolution.com</span>
+                <span
+                  className="cursor-pointer"
+                  onClick={() =>
+                    handleOpenLink("https://www.nextsolution.net/")
+                  }
+                >
+                  nextsolution.com
+                </span>
               </div>
             </div>
           </div>
@@ -107,4 +124,3 @@ const DigitalCard2 = () => {
 };
 
 export default DigitalCard2;
-

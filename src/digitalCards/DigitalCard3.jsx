@@ -7,7 +7,7 @@ import MobileWrapper from "./MobileWrapper";
 
 const DigitalCard3 = () => {
   return (
-    <div className="w-screen h-screen flex px-3 items-center justify-center bg-white">
+    <div className="w-screen h-screen flex px-3 items-center justify-cente">
     <MobileWrapper>
       <div
         className="relative w-full max-w-[24.75rem] h-[69.785rem] flex flex-col justify-end gap-[3.18rem]
