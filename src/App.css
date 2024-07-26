@@ -1,18 +1,15 @@
-body {
-  background-image: radial-gradient(
-    86.45% 86.43% at 44.84% 49.96%,
-    #abd7d7 31.6%,
-    #cb7fed 100%
-  );
-}
 #root {
   height: 100vh;
 }
 
 .slick-prev,
 .slick-next {
-  background-color: green !important;
+  background-color: rgba(217, 228, 244, 1) !important;
   border-radius: 10px !important ;
+}
+.slick-next svg {
+  fill: blue;
+  stroke: blue;
 }
 
 .mock-up-1 {
@@ -66,4 +63,35 @@ body {
     #abd7d7 31.6%,
     #cb7fed 100%
   );
+}
+
+.card-article {
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.12);
+  /* shadow-md */
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.03),
+    0px 8px 32px 0px rgba(0, 0, 0, 0.06);
+  margin-bottom: 12px;
+  margin-top: 12px;
+  padding: 8px;
+}
+
+.wave-bg {
+  background-image: url(./assets/wavebg.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 75rem !important;
+}
+
+.cheque-bg {
+  background-image: url(./assets/cheque-bg.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 75rem !important;
+}
+
+.main-bg {
+  background-image: url(./assets/Isolation_Mode.png);
+  background-repeat: no-repeat;
+  background-size: cover;
 }

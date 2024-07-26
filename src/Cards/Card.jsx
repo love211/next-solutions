@@ -2,9 +2,10 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import card1 from "../assets/41.png";
-import card2 from "../assets/image2.png";
-import card3 from "../assets/imageslide2.png";
+import card2 from "../assets/new1.png";
+import card3 from "../assets/new2.png";
 import card4 from "../assets/image4.png";
+import card5 from "../assets/image2.png"
 import { useNavigate } from "react-router";
 
 let slideCss =
@@ -49,15 +50,15 @@ const CardTemplate = () => {
             <img src={card3} className={slideCss} alt="" />
           </div>
           <div onClick={() => navigate("/template/3")}>
-            <img src={card1} className={slideCss} alt="" />
+            <img src={card4} className={slideCss} alt="" />
           </div>
 
           <div onClick={() => navigate("/template/4")}>
-            <img src={card4} className={slideCss} alt="" />
+            <img src={card1} className={slideCss} alt="" />
           </div>
-          {/* <div onClick={() => navigate("/template/5")}>
+          <div onClick={() => navigate("/template/5")}>
             <img src={card5} className={slideCss} alt="" />
-          </div> */}
+          </div>
         </Slider>
       </div>
     </div>

@@ -1,48 +1,65 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../auth/useAuth";
 import { useGoogleLogin } from "@react-oauth/google";
+
+import { parsePhoneNumberFromString } from "libphonenumber-js";
 import { toast } from "react-toastify";
 
 const validationSchema = Yup.object().shape({
+  name: Yup.string().required("Name is Required"),
   email: Yup.string()
     .email("Invalid email address")
     .required("Email is Required"),
   password: Yup.string().required("Password is Required"),
+  contactNo: Yup.string()
+    .test("is-valid-phone", "Invalid phone number", (value) => {
+      if (!value) return false;
+      const phoneNumber = parsePhoneNumberFromString(value);
+      return phoneNumber ? phoneNumber.isValid() : false;
+    })
+    .required("Contact number is Required"),
 });
-const LoginPage = () => {
-  const { login } = useAuth();
+
+const SignUpPage = () => {
+  const { register } = useAuth();
   const navigate = useNavigate();
-  // const login = useGoogleLogin({
-  //   onSuccess: (codeResponse) => setUser(codeResponse),
-  //   onError: (error) => console.log("Login Failed:", error),
-  // });
+  const login = useGoogleLogin({
+    onSuccess: (codeResponse) => setUser(codeResponse),
+    onError: (error) => console.log("Login Failed:", error),
+  });
 
   const formik = useFormik({
     initialValues: {
+      name: "",
       email: "",
       password: "",
+      contactNo: "",
     },
     validationSchema: validationSchema,
     onSubmit: async (values, { setSubmitting }) => {
       try {
         setSubmitting(true);
-        await login(values.email, values.password);
+        await register(
+          values.name,
+          values.email,
+          values.password,
+          values.contactNo
+        );
+        toast.success("User created Successfully");
         setSubmitting(false);
-        toast.success("user login success");
         navigate("/");
       } catch (error) {
+        console.log("error", error);
         setSubmitting(false);
-        console.log(error);
-        // toast.error(error.response.data.message || "something went wrong");
       }
-      console.log(values);
     },
   });
 
   const { handleSubmit, handleChange, values, errors, touched } = formik;
+
   return (
     <div className="w-screen h-screen px-4 bg-image flex items-center justify-center">
       <div className="max-w-[40.25rem] max-h-[46.875rem] hidden xl:flex items-center justify-center rounded-l-[0.5rem] overflow-clip">
@@ -64,10 +81,10 @@ const LoginPage = () => {
               Next Solutions
             </p>
             <h1 className="text-[1.75rem] text-[#031B59] font-semibold">
-              Welcome Back!
+              Welcome!
             </h1>
             <p className="text-[#686868]">
-              Enter your credentials to access your account.
+              Enter your details to start your account.
             </p>
           </div>
           {/* Form Start */}
@@ -76,8 +93,24 @@ const LoginPage = () => {
             onSubmit={handleSubmit}
           >
             <div className="w-full flex flex-col gap-[0.75rem]">
-              {/* Input Field Container */}
               <div className="w-full flex flex-col items-start gap-[1.12rem]">
+                {/* Name field */}
+                <div className="w-full flex flex-col gap-[0.25rem]">
+                  <label className="text-[#191919]" htmlFor="email">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    onChange={handleChange}
+                    value={values.name}
+                    className="w-full h-[2.625rem] p-[0.62rem] flex items-center border border-[#E2E8F0] rounded-[0.25rem]"
+                  />
+                  {errors.name && touched.name && (
+                    <div className="text-red-500">{errors.name}</div>
+                  )}
+                </div>
                 {/* Email Field */}
                 <div className="w-full flex flex-col gap-[0.25rem]">
                   <label className="text-[#191919]" htmlFor="email">
@@ -112,6 +145,22 @@ const LoginPage = () => {
                     <div className="text-red-500">{errors.password}</div>
                   )}
                 </div>
+                <div className="w-full flex flex-col gap-[0.25rem]">
+                  <label className="text-[#191919]" htmlFor="password">
+                    Contact No.
+                  </label>
+                  <input
+                    type="text"
+                    id="contact_no"
+                    name="contactNo"
+                    onChange={handleChange}
+                    value={values.contactNo}
+                    className="w-full h-[2.625rem] p-[0.62rem] flex items-center border border-[#E2E8F0] rounded-[0.25rem]"
+                  />
+                  {errors.contactNo && touched.contactNo && (
+                    <div className="text-red-500">{errors.contactNo}</div>
+                  )}
+                </div>
               </div>
               {/* Forget password and Remember me */}
               <div className="w-full h-fit flex flex-col lg:flex-row lg:justify-between items-center gap-2">
@@ -127,11 +176,11 @@ const LoginPage = () => {
                   <span className="text-[#191919]">Remember me</span>
                 </div>
                 <Link
-                  to={"/sign-up"}
+                  to={"/login"}
                   className="w-full flex items-center justify-start lg:justify-end"
                 >
                   <p className="text-[#031B59] font-semibold">
-                    if new user go to Signup
+                    Already a user? to Login
                   </p>
                 </Link>
               </div>
@@ -142,20 +191,19 @@ const LoginPage = () => {
                 formik.isSubmitting ? "bg-gray-400" : "bg-[#031B59]"
               } rounded-[8px]`}
             >
-              <button className="text-white" type="submit">
-                {formik.isSubmitting ? "Logging in..." : "Log In"}
+              <button
+                className="text-white"
+                type="submit"
+                disabled={formik.isSubmitting}
+              >
+                {formik.isSubmitting ? "Submitting...!" : "Sign Up"}
               </button>
             </div>
           </form>
-          {/* <div className="w-full flex items-center justify-center px-[24px] py-[12px] bg-[#031B59] rounded-[8px]">
-            <button className="text-white" onClick={login}>
-              Google Log In
-            </button>
-          </div> */}
         </div>
       </div>
     </div>
   );
 };
 
-export default LoginPage;
+export default SignUpPage;
