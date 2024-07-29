@@ -8,8 +8,6 @@ import CardCheque from "../digitalCards/CheckCard";
 
 const Template = () => {
   const cardId = useParams();
-  console.log("cardId", cardId);
-
   let cardToRender = {
     1: <CardWave />,
     2: <CardCheque />,

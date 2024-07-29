@@ -5,6 +5,7 @@ import LoginPage from "../pages/auth/Login";
 import AuthGuard from "../auth/AuthGuard";
 import SignUpPage from "../pages/auth/SignUp";
 import PrivateLayout from "../layout/PrivateLayout";
+import UserCards from "@/pages/UserCards";
 
 const RoutesProvider = () => (
   <Routes>
@@ -20,6 +21,7 @@ const RoutesProvider = () => (
       }
     >
       <Route path="/template/:1" element={<Template />} />
+      <Route path="/user-generated-cards/" element={<UserCards />} />
     </Route>
   </Routes>
 );

@@ -1,10 +1,13 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../auth/useAuth";
 import { useGoogleLogin } from "@react-oauth/google";
 import { toast } from "react-toastify";
+import { Button } from "@/components/ui/button";
+import { auth0Config } from "@/config";
+import axios from "axios";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -13,8 +16,10 @@ const validationSchema = Yup.object().shape({
   password: Yup.string().required("Password is Required"),
 });
 const LoginPage = () => {
-  const { login } = useAuth();
+  const { login, loginGoggle } = useAuth();
   const navigate = useNavigate();
+  const [user, setUser] = useState([]);
+  const [profile, setProfile] = useState([]);
   // const login = useGoogleLogin({
   //   onSuccess: (codeResponse) => setUser(codeResponse),
   //   onError: (error) => console.log("Login Failed:", error),
@@ -42,6 +47,83 @@ const LoginPage = () => {
     },
   });
 
+  // const handleGauth = () => {
+  // loginGoggle();
+  // window.open("https://next-solution-be.vercel.app/auth/google/callback","_self")
+  // window.location.href = ' https://next-solution-be.vercel.app/auth/google';
+  const GoogleLoginButton = () => {
+    const handleGoogleAuth = useGoogleLogin({
+      // onSuccess: async (codeResponse) => {
+      //   console.log("codeResponse", codeResponse);
+
+      //   try {
+      //     // Exchange authorization code for access token
+      //     const tokenResponse = await axios.post(
+      //       "https://oauth2.googleapis.com/token",
+      //       {
+      //         code: codeResponse.code,
+      //         client_id: auth0Config.clientId,
+      //         client_secret: auth0Config.clientId,
+      //         redirect_uri: "http://localhost:5173/",
+      //         grant_type: "authorization_code",
+      //       }
+      //     );
+
+      //     const accessToken = tokenResponse.data.access_token;
+      //     console.log("Access Token:", accessToken);
+
+      //     // Fetch user information from Google's API
+      //     const userInfo = await axios.get(
+      //       "https://www.googleapis.com/oauth2/v3/userinfo",
+      //       {
+      //         headers: {
+      //           Authorization: `Bearer ${accessToken}`,
+      //         },
+      //       }
+      //     );
+
+      //     console.log("User Info:", userInfo.data);
+
+      //     // Send the user information to your backend
+      //     await axios.post(" https://next-solution-be.vercel.app/auth/google", {
+      //       userInfo: userInfo.data,
+      //     });
+      //   } catch (error) {
+      //     console.error("Error fetching user information:", error);
+      //   }
+      // },
+      onSuccess: (codeResponse) => {
+        console.log('codeResponse', codeResponse)
+        setUser(codeResponse.code);
+      },
+      onError: () => console.log("Login Failed"),
+      flow: "auth-code",
+    });
+
+    return (
+      <Button onClick={() => handleGoogleAuth()}>Sign in with Google 🚀</Button>
+    );
+  };
+
+  useEffect(() => {
+    if (user) {
+      axios
+        .get(
+          `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user}`,
+          {
+            headers: {
+              Authorization: `Bearer ${user.access_token}`,
+              Accept: "application/json",
+            },
+          }
+        )
+        .then((res) => {
+          setProfile(res.data);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [user]);
+  // };
   const { handleSubmit, handleChange, values, errors, touched } = formik;
   return (
     <div className="w-screen h-screen px-4 bg-image flex items-center justify-center">
@@ -148,10 +230,11 @@ const LoginPage = () => {
             </div>
           </form>
           {/* <div className="w-full flex items-center justify-center px-[24px] py-[12px] bg-[#031B59] rounded-[8px]">
-            <button className="text-white" onClick={login}>
+            <button className="text-white" onClick={GoogleLoginButton}>
               Google Log In
             </button>
           </div> */}
+          <GoogleLoginButton />
         </div>
       </div>
     </div>

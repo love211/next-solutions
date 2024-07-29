@@ -24,11 +24,16 @@ import {
 import useMediaQuery from "@/hooks/useMediaQuery";
 import AddUserButton from "../AddUserButton";
 import TemplateForm from "./UserForm";
-
+import PreviewTemplate from "../../digitalCards/PreviewTemplate";
 export function DrawerDialogDemo({ buttonTitle = "Create One" }) {
   const [open, setOpen] = React.useState(false);
+  const [preview, setPreview] = React.useState(null);
   const isDesktop = useMediaQuery("(min-width: 768px)");
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setPreview(null);
+    setOpen(false);
+  };
+
   if (isDesktop) {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
@@ -36,17 +41,26 @@ export function DrawerDialogDemo({ buttonTitle = "Create One" }) {
           {/* <Button variant="outline">{buttonTitle}</Button> */}
           <AddUserButton />
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px] max-h-[700px] lg:max-h-full">
+        <DialogContent
+          className="sm:max-w-[900px] max-h-[870px]"
+          onClose={handleClose}
+        >
+          {/* <DialogContent className="sm:max-w-[425px] max-h-[700px] lg:max-h-full"> */}
           <DialogHeader>
             <DialogTitle>Create Business Card</DialogTitle>
             <DialogDescription>
               Make changes to your card here. Click save when you're done.
             </DialogDescription>
           </DialogHeader>
-          <TemplateForm
-            className={"px-4 max-h-[500px] lg:max-h-full overflow-y-auto"}
-            onClose={handleClose}
-          />
+          <div className="flex flex-row gap-2">
+            <TemplateForm
+              className={"px-4 max-h-[500px] lg:max-h-full overflow-y-auto"}
+              onClose={handleClose}
+              setPreview={setPreview}
+              isPreview={preview ? true : false}
+            />
+            {preview && <PreviewTemplate data={preview} />}
+          </div>
         </DialogContent>
       </Dialog>
     );

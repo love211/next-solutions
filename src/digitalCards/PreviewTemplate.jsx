@@ -1,5 +1,5 @@
-import React, { useState } from "react";
 import MobileWrapper from "./MobileWrapper";
+import React, { useState } from "react";
 import UserImg from "../assets/user.png";
 import { BsTelephone } from "react-icons/bs";
 import { CiGlobe } from "react-icons/ci";
@@ -7,21 +7,20 @@ import { MdInsertLink, MdOutlineMailOutline } from "react-icons/md";
 import AddUserButton from "../components/AddUserButton";
 import { DrawerDialogDemo } from "@/components/dialog/AddTemplateDialog";
 import { Link } from "react-router-dom";
-import { handleOpenLink } from "@/util/cardHelper";
+import { getCardData, handleOpenLink } from "@/util/cardHelper";
 
-
-const CardCheque = () => {
-  const [open, setOpen] = useState(false);
+const PreviewTemplate = ({ data }) => {
+  const { name, designation, company, about, phone, email, weblink } =
+    getCardData(data);
 
   return (
-    <>
-      <MobileWrapper>
+    <div className="flex max-h-[65%]">
+      <MobileWrapper customHeight="h-full">
         <div className="w-[20rem] h-[75rem] flex items-start justify-center cheque-bg pt-[5.8rem]">
           {/* 1st Section */}
           <div className="w-full flex flex-col items-center justify-start gap-[2.5rem]">
             <div className="w-full flex flex-col items-center gap-[1.5rem]">
               {/* <AddUserButton onClick={() => setOpen(true)} /> */}
-              <DrawerDialogDemo />
               <div className="w-[10.875rem] h-[10.875rem] border-[#fff] boder-4">
                 <img
                   src={UserImg}
@@ -31,32 +30,29 @@ const CardCheque = () => {
               </div>
               <div className="w-full flex flex-col items-center text-center text-white">
                 <p className="text-2xl font-extrabold drop-shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
-                  Smrita Smith
+                  {name}
                 </p>
-                <p>Marketing Expert</p>
-                <p>ABC Company</p>
+                <p>{designation}</p>
+                <p>{company}</p>
               </div>
             </div>
             <div
               className="w-full h-[9.0625rem] p-[1.25rem] flex flex-col items-center gap-[0.5rem] text-white text-center
-       bg-[rgba(6,76,122,1)]"
+            bg-[rgba(6,76,122,1)]"
             >
               <p className="font-bold">About Me</p>
-              <p>
-                I'm a highly skilled marketing profession with over 7 years of
-                industry experience.
-              </p>
+              <p>{about}</p>
             </div>
             <div
               className="w-full h-[9.9375rem]  flex flex-col items-center text-white text-center
-       bg-[#B9DBD8]"
+            bg-[#B9DBD8]"
             >
               <button className="w-full h-[3.3125rem] px-4 flex items-start border-b border-b-[rgba(51,81,114,0.30)] overflow-clip">
                 <div className="w-[3rem] h-full flex items-center justify-center bg-[rgba(51,81,114,0.3)] ">
                   <BsTelephone className="fill-[rgba(3,6,45,1)]" />
                 </div>
                 <div className="w-full h-full px-4 flex items-center justify-start">
-                  <p className="text-black">+91 7846589803</p>
+                  <p className="text-black">{phone}</p>
                 </div>
               </button>
               <button className="w-full h-[3.3125rem] px-4  flex items-start border-b border-b-[rgba(51,81,114,0.30)]">
@@ -69,7 +65,7 @@ const CardCheque = () => {
                     handleOpenLink("https://www.nextsolution.net/")
                   }
                 >
-                  <p className="text-black">helen@nextsolution.com</p>
+                  <p className="text-black">{email}</p>
                 </div>
               </button>
               <button className="w-full h-[3.3125rem]  px-4 flex items-start border-b border-b-[rgba(51,81,114,0.30)]">
@@ -82,13 +78,13 @@ const CardCheque = () => {
                     handleOpenLink("https://www.nextsolution.net/")
                   }
                 >
-                  <p className="text-black">nextsolution.com</p>
+                  <p className="text-black">{weblink}</p>
                 </div>
               </button>
             </div>
             <div
               className="w-full p-[1.25rem] flex flex-col items-center gap-[1.25rem] bg-[#064C7A]
-          "
+            "
             >
               <div className="w-full max-w-[15.875rem] flex flex-col gap-[0.5rem] text-center text-white">
                 <p className="text-2xl text-bold">Web Links</p>
@@ -99,7 +95,7 @@ const CardCheque = () => {
               </div>
               <button
                 className="w-full  h-[3rem] px-[0.75rem] flex justify-start items-center gap-[0.69rem] rounded-[0.5rem] border-[0.5px]
-             border-[#fff] bg-[rgba(255,255,255,0.12)]"
+               border-[#fff] bg-[rgba(255,255,255,0.12)]"
               >
                 <div className="min-w-[1.875rem] min-h-[1.875rem] rounded-[0.5rem] flex items-center justify-center border-[0.5px] border-[#fff] bg-[#447EAB]">
                   <MdInsertLink className="fill-white" />
@@ -111,11 +107,11 @@ const CardCheque = () => {
               </button>
               <button
                 className="w-full  h-[3rem] px-[0.75rem] flex justify-start items-center gap-[0.69rem]
-             rounded-[0.5rem] border-[0.5px] border-[#fff] bg-[rgba(255,255,255,0.12)]"
+              rounded-[0.5rem] border-[0.5px] border-[#fff] bg-[rgba(255,255,255,0.12)]"
               >
                 <div
                   className="min-w-[1.875rem] min-h-[1.875rem] rounded-[0.5rem] flex items-center justify-center
-              bg-[#447EAB] border-[0.5px] border-[#fff]"
+                bg-[#447EAB] border-[0.5px] border-[#fff]"
                 >
                   <MdInsertLink className="fill-white" />
                 </div>
@@ -129,9 +125,8 @@ const CardCheque = () => {
         </div>
         {/* <button>Create one</button> */}
       </MobileWrapper>
-      {/* {open && <DrawerDialogDemo />} */}
-    </>
+    </div>
   );
 };
 
-export default CardCheque;
+export default PreviewTemplate;

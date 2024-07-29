@@ -120,6 +120,17 @@ function AuthProvider({ children }) {
     });
   };
 
+  const loginGoggle = async (email, password) => {
+    const response = await apiService.get(apiEndpoints.gAuth);
+    const { data, meta } = response.data;
+    setSession(meta.token);
+    dispatch({
+      type: Types.Login,
+      payload: {
+        user: { ...data },
+      },
+    });
+  };
   const register = async (name, email, password, contactNumber) => {
     const response = await apiService.post(apiEndpoints.signUp, {
       data: {
@@ -158,6 +169,7 @@ function AuthProvider({ children }) {
         ...state,
         method: "jwt",
         login,
+        loginGoggle,
         logout,
         register,
         resetPassword,

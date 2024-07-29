@@ -2,8 +2,7 @@ import { FaCaretRight, FaPhoneAlt, FaRegEnvelope } from "react-icons/fa";
 import MobileWrapper from "./MobileWrapper";
 import profile from "../assets/img1.png";
 import { BsBrowserEdge } from "react-icons/bs";
-import { DrawerDialogDemo } from "@/components/dialog/AddTemplateDialog";
-import { handleOpenLink } from "./CheckCard";
+import { handleOpenLink } from "@/util/cardHelper";
 const Article = () => (
   <div className="flex gap-4 w-full card-article justify-center items-center">
     <div className="bg-[#8FA855] h-12 w-12 flex items-center justify-center rounded-lg">
