@@ -1,6 +1,5 @@
 export const auth0Config = {
-  clientId:
-    "305283768770-an9sad3dvc1dcm5fcl8k1h8s29op261k.apps.googleusercontent.com",
-  domain: "https://next-solutions.vercel.app/",
-  secretId:"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"
+  clientId: import.meta.env.GOOGLE_OAUTH_CLIENT_ID,
+  domain: import.meta.env.GOOGLE_AUTH_URI,
+  secretId: import.meta.env.GOOGLE_OAUTH_CLIENT_SECRET,
 };
