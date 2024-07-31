@@ -8,6 +8,8 @@ import AddUserButton from "../components/AddUserButton";
 import { DrawerDialogDemo } from "@/components/dialog/AddTemplateDialog";
 import { Link } from "react-router-dom";
 import { getCardData, handleOpenLink } from "@/util/cardHelper";
+import { insertZeroWidthSpace } from "@/util/commonFn";
+import { TooltipCustom } from "@/components/Tooltip";
 
 const PreviewTemplate = ({ data }) => {
   const { name, designation, company, about, phone, email, weblink } =
@@ -15,7 +17,7 @@ const PreviewTemplate = ({ data }) => {
 
   return (
     <div className="flex max-h-[65%]">
-      <MobileWrapper customHeight="h-full">
+      <MobileWrapper>
         <div className="w-[20rem] h-[75rem] flex items-start justify-center cheque-bg pt-[5.8rem]">
           {/* 1st Section */}
           <div className="w-full flex flex-col items-center justify-start gap-[2.5rem]">
@@ -78,7 +80,27 @@ const PreviewTemplate = ({ data }) => {
                     handleOpenLink("https://www.nextsolution.net/")
                   }
                 >
-                  <p className="text-black">{weblink}</p>
+                  <TooltipCustom
+                    msg={weblink}
+                    element={
+                      <p className="text-black break-words max-w-80" >
+                        {console.log(
+                          "insertZeroWidthSpace(weblink)",
+                          insertZeroWidthSpace(weblink),
+                          weblink
+                        )}
+                        {insertZeroWidthSpace(weblink)}
+                      </p>
+                    }
+                  />
+                  {/* <p className="text-black break-words" title={weblink}>
+                    {console.log(
+                      "insertZeroWidthSpace(weblink)",
+                      insertZeroWidthSpace(weblink),
+                      weblink
+                    )}
+                    {insertZeroWidthSpace(weblink)}
+                  </p> */}
                 </div>
               </button>
             </div>

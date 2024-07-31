@@ -42,7 +42,7 @@ export function DrawerDialogDemo({ buttonTitle = "Create One" }) {
           <AddUserButton />
         </DialogTrigger>
         <DialogContent
-          className="sm:max-w-[900px] max-h-[870px]"
+          className={`sm:max-w-[900px] max-h-[90%]`}
           onClose={handleClose}
         >
           {/* <DialogContent className="sm:max-w-[425px] max-h-[700px] lg:max-h-full"> */}
@@ -52,9 +52,9 @@ export function DrawerDialogDemo({ buttonTitle = "Create One" }) {
               Make changes to your card here. Click save when you're done.
             </DialogDescription>
           </DialogHeader>
-          <div className="flex flex-row gap-2">
+          <div className="flex flex-row gap-2 h-full overflow-y-auto">
             <TemplateForm
-              className={"px-4 max-h-[500px] lg:max-h-full overflow-y-auto"}
+              className={"px-4 overflow-y-auto h-full"}
               onClose={handleClose}
               setPreview={setPreview}
               isPreview={preview ? true : false}

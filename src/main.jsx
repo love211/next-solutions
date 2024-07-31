@@ -18,12 +18,12 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <Provider store={store}>
       <Trans>
-        <GoogleOAuthProvider clientId={auth0Config.clientId}>
+        {/* <GoogleOAuthProvider clientId={auth0Config.clientId}> */}
           <AuthProvider>
             <App />
             <ToastContainer autoClose={3000} />
           </AuthProvider>
-        </GoogleOAuthProvider>
+        {/* </GoogleOAuthProvider> */}
       </Trans>
     </Provider>
   </BrowserRouter>
