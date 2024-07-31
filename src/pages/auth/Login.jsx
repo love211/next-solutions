@@ -9,6 +9,10 @@ import { Button } from "@/components/ui/button";
 import { auth0Config } from "@/config";
 import axios from "axios";
 import { Auth0Client } from "@auth0/auth0-spa-js";
+import { useAuth0 } from "@auth0/auth0-react";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -19,12 +23,18 @@ const validationSchema = Yup.object().shape({
 const LoginPage = () => {
   const { login, loginGoggle } = useAuth();
   const navigate = useNavigate();
-  const [user, setUser] = useState([]);
+  // const [user, setUser] = useState([]);
   const [profile, setProfile] = useState([]);
+
+  const { user, isAuthenticated, isLoading } = useAuth0();
   // const login = useGoogleLogin({
   //   onSuccess: (codeResponse) => setUser(codeResponse),
   //   onError: (error) => console.log("Login Failed:", error),
   // });
+
+  console.log("useruser", user);
+
+  const { loginWithRedirect } = useAuth0();
 
   const formik = useFormik({
     initialValues: {
@@ -108,13 +118,12 @@ const LoginPage = () => {
       // });
       // console.log("auth0Client", auth0Client);
       // await auth0Client?.loginWithPopup();
-
       // const isAuthenticated = await auth0Client?.isAuthenticated();
       // if (isAuthenticated) {
       //   const user = await auth0Client?.getUser();
       //   console.log("user", user);
       // }
-      window.open("https://next-solution-be.vercel.app/auth/google/callback","_self")
+      // window.open("https://next-solution-be.vercel.app/auth/google/callback","_self")
     };
 
     return <Button onClick={() => glogin()}>Sign in with Google 🚀</Button>;
@@ -244,12 +253,25 @@ const LoginPage = () => {
               </button>
             </div>
           </form>
-          {/* <div className="w-full flex items-center justify-center px-[24px] py-[12px] bg-[#031B59] rounded-[8px]">
-            <button className="text-white" onClick={GoogleLoginButton}>
+          <div className="w-full flex items-center justify-center px-[24px] py-[12px] bg-[#031B59] rounded-[8px]">
+            {/* <button className="text-white" onClick={() => loginWithRedirect()}>
               Google Log In
-            </button>
-          </div> */}
-          <GoogleLoginButton />
+            </button> */}
+            <GoogleOAuthProvider clientId="305283768770-an9sad3dvc1dcm5fcl8k1h8s29op261k.apps.googleusercontent.com">
+              <GoogleLogin
+                onSuccess={(credentialResponse) => {
+                  const token = credentialResponse.credential;
+                  const decoded = jwtDecode(token);
+                  console.log("decoded-------------->", decoded);
+                  console.log(credentialResponse.credential);
+                }}
+                onError={() => {
+                  console.log("Login Failed");
+                }}
+              />
+            </GoogleOAuthProvider>
+          </div>
+          {/* <GoogleLoginButton /> */}
         </div>
       </div>
     </div>

@@ -12,18 +12,28 @@ import "react-toastify/dist/ReactToastify.css";
 import { AuthProvider } from "./contexts/JwtContext.jsx";
 import store from "./redux/store.js";
 import { Provider } from "react-redux";
+import { Auth0Provider } from '@auth0/auth0-react';
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   // <React.StrictMode>
   <BrowserRouter>
     <Provider store={store}>
       <Trans>
-        <GoogleOAuthProvider clientId={auth0Config.clientId}>
-          <AuthProvider>
-            <App />
-            <ToastContainer autoClose={3000} />
-          </AuthProvider>
-        </GoogleOAuthProvider>
+        <AuthProvider>
+        <Auth0Provider
+          domain="dev-w5uboe1qwccvywgi.uk.auth0.com"
+          clientId="31gOItzW295Csgqvt2AL9fG4rVfdv8CZ"
+          authorizationParams={{
+            redirect_uri: window.location.origin,
+          }}
+        >
+          <App />
+        </Auth0Provider>
+        </AuthProvider>
+        {/* <GoogleOAuthProvider clientId={auth0Config.clientId}> */}
+        <ToastContainer autoClose={3000} />
+        {/* </AuthProvider> */}
+        {/* </GoogleOAuthProvider> */}
       </Trans>
     </Provider>
   </BrowserRouter>
