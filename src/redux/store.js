@@ -1,11 +1,9 @@
-
-import { configureStore } from "@reduxjs/toolkit"
+import { configureStore } from "@reduxjs/toolkit";
+import templateReducer from "./slices/templateSlice";
 const store = configureStore({
   reducer: {
-     [api.reducerPath]: api.reducer,
+    template: templateReducer,
   },
-   middleware: (getDefaultMiddleware) =>
-     getDefaultMiddleware().concat(api.middleware),
 });
 
 export default store;

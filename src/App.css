@@ -95,3 +95,7 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.dialog-styling{
+  max-width: 650px;
+}

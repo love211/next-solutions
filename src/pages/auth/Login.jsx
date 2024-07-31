@@ -3,8 +3,10 @@ import * as Yup from "yup";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../auth/useAuth";
-import { useGoogleLogin } from "@react-oauth/google";
+
 import { toast } from "react-toastify";
+
+import GoogleLogin from "./GoogleLogin";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -15,11 +17,6 @@ const validationSchema = Yup.object().shape({
 const LoginPage = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
-  // const login = useGoogleLogin({
-  //   onSuccess: (codeResponse) => setUser(codeResponse),
-  //   onError: (error) => console.log("Login Failed:", error),
-  // });
-
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -36,9 +33,7 @@ const LoginPage = () => {
       } catch (error) {
         setSubmitting(false);
         console.log(error);
-        // toast.error(error.response.data.message || "something went wrong");
       }
-      console.log(values);
     },
   });
 
@@ -148,10 +143,12 @@ const LoginPage = () => {
             </div>
           </form>
           {/* <div className="w-full flex items-center justify-center px-[24px] py-[12px] bg-[#031B59] rounded-[8px]">
-            <button className="text-white" onClick={login}>
+            <button className="text-white" onClick={GoogleLoginButton}>
               Google Log In
             </button>
           </div> */}
+          {/* <GoogleLoginButton /> */}
+          <GoogleLogin />
         </div>
       </div>
     </div>

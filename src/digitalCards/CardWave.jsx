@@ -5,6 +5,7 @@ import { BsTelephone } from "react-icons/bs";
 import { CiGlobe } from "react-icons/ci";
 import { MdInsertLink, MdOutlineMailOutline } from "react-icons/md";
 import { DrawerDialogDemo } from "@/components/dialog/AddTemplateDialog";
+import { handleOpenLink } from "@/util/cardHelper";
 
 const CardWave = () => {
   return (

@@ -3,7 +3,6 @@ import * as Yup from "yup";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../auth/useAuth";
-import { useGoogleLogin } from "@react-oauth/google";
 
 import { parsePhoneNumberFromString } from "libphonenumber-js";
 import { toast } from "react-toastify";
@@ -26,10 +25,6 @@ const validationSchema = Yup.object().shape({
 const SignUpPage = () => {
   const { register } = useAuth();
   const navigate = useNavigate();
-  const login = useGoogleLogin({
-    onSuccess: (codeResponse) => setUser(codeResponse),
-    onError: (error) => console.log("Login Failed:", error),
-  });
 
   const formik = useFormik({
     initialValues: {

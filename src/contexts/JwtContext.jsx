@@ -8,6 +8,8 @@ import {
 } from "../api/authHelper";
 import apiService from "../api/axios";
 import { apiEndpoints } from "../api/apiEndPoint";
+import { Navigate, useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 // ----------------------------------------------------------------------
 
@@ -60,7 +62,7 @@ const AuthContext = createContext(null);
 
 function AuthProvider({ children }) {
   const [state, dispatch] = useReducer(JWTReducer, initialState);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const initialize = async () => {
       try {
@@ -120,6 +122,28 @@ function AuthProvider({ children }) {
     });
   };
 
+  const handleGoogleLogin = async (token, userDetails) => {
+    try {
+      const response = await apiService.post(apiEndpoints.gAuth, {
+        data: {
+          name: userDetails.family_name + " " + userDetails.given_name,
+          email: userDetails.email,
+        },
+      });
+      const { data, meta } = response.data;
+      setSession(meta.token);
+      dispatch({
+        type: Types.Login,
+        payload: {
+          user: { ...data },
+        },
+      });
+      toast.success("login successfully");
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const register = async (name, email, password, contactNumber) => {
     const response = await apiService.post(apiEndpoints.signUp, {
       data: {
@@ -150,7 +174,6 @@ function AuthProvider({ children }) {
   const resetPassword = (email) => console.log(email);
 
   const updateProfile = () => {};
-  console.log("response", state.user);
 
   return (
     <AuthContext.Provider
@@ -158,6 +181,7 @@ function AuthProvider({ children }) {
         ...state,
         method: "jwt",
         login,
+        handleGoogleLogin,
         logout,
         register,
         resetPassword,

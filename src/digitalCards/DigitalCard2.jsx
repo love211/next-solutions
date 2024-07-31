@@ -1,7 +1,7 @@
 import React from "react";
 import MobileWrapper from "./MobileWrapper";
 import { DrawerDialogDemo } from "@/components/dialog/AddTemplateDialog";
-import { handleOpenLink } from "./CheckCard";
+import { handleOpenLink } from "@/util/cardHelper";
 
 const DigitalCard2 = () => {
   return (
