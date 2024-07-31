@@ -14,7 +14,6 @@ import PreviewTemplate from "@/digitalCards/PreviewTemplate";
 
 const TemplateForm = ({ className, onClose, setPreview, isPreview }) => {
   const { user } = useAuth();
-  const [submit, setSubmit] = useState(false);
   const cardId = useParams();
   const formik = useFormik({
     initialValues: {
@@ -35,11 +34,10 @@ const TemplateForm = ({ className, onClose, setPreview, isPreview }) => {
       email: Yup.string()
         .email("Invalid email address")
         .required("Email is required"),
-      weblink: Yup.string().url("Invalid URL").required("Web link is required"),
+      weblink: Yup.string().required("Web link is required"),
     }),
     onSubmit: async (values, { setSubmitting }) => {
       try {
-        console.log("hi preview");
         setPreview(values);
         if (isPreview) {
           handleConfirm();
@@ -47,8 +45,6 @@ const TemplateForm = ({ className, onClose, setPreview, isPreview }) => {
       } catch (error) {
         setSubmitting(false);
       }
-
-      // Handle form submission
     },
   });
 
@@ -78,9 +74,9 @@ const TemplateForm = ({ className, onClose, setPreview, isPreview }) => {
   };
   return (
     <FormikProvider value={formik.values}>
-      <div className="flex w-full h-full">
+      <div className={`flex w-full h-full ${className}`}>
         <Form
-          className={`flex flex-col gap-8 w-full ${className} `}
+          className={`flex flex-col gap-8 w-full py-4`}
           onSubmit={formik.handleSubmit}
         >
           <div className="flex flex-col gap-2">

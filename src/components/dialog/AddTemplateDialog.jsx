@@ -25,6 +25,8 @@ import useMediaQuery from "@/hooks/useMediaQuery";
 import AddUserButton from "../AddUserButton";
 import TemplateForm from "./UserForm";
 import PreviewTemplate from "../../digitalCards/PreviewTemplate";
+
+
 export function DrawerDialogDemo({ buttonTitle = "Create One" }) {
   const [open, setOpen] = React.useState(false);
   const [preview, setPreview] = React.useState(null);
@@ -42,10 +44,9 @@ export function DrawerDialogDemo({ buttonTitle = "Create One" }) {
           <AddUserButton />
         </DialogTrigger>
         <DialogContent
-          className={`sm:max-w-[900px] max-h-[90%]`}
+          className={`max-w-[80%] lg:max-w-[56.25rem] w-full max-h-[90%] h-full`}
           onClose={handleClose}
         >
-          {/* <DialogContent className="sm:max-w-[425px] max-h-[700px] lg:max-h-full"> */}
           <DialogHeader>
             <DialogTitle>Create Business Card</DialogTitle>
             <DialogDescription>
