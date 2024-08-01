@@ -9,7 +9,6 @@ import { getCardData, handleOpenLink } from "@/util/cardHelper";
 import { insertZeroWidthSpace } from "@/util/commonFn";
 
 const CardWave = ({ data, isPreview = false }) => {
-  console.log("data", data);
   const { name, designation, company, about, phone, email, weblink } =
     getCardData(data);
   return (

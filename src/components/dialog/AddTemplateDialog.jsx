@@ -89,7 +89,20 @@ export function DrawerDialogDemo({ buttonTitle = "Create One" }) {
         <TemplateForm
           className="px-4 max-h-[500px] overflow-y-auto"
           onClose={handleClose}
+          setPreview={setPreview}
+          isPreview={preview ? true : false}
         />
+        {preview && (
+          <Drawer open={preview && !isDesktop} onOpenChange={setOpen}>
+            <DialogContent onClose={handleClose} className="flex max-h-[75%] justify-center">
+              <PreviewTemplate
+                data={preview}
+                cardId={cardId[1]}
+                customClass={""}
+              />
+            </DialogContent>
+          </Drawer>
+        )}
         <DrawerFooter className="pt-2">
           <DrawerClose asChild>
             <Button variant="outline">Cancel</Button>

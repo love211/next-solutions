@@ -1,11 +1,7 @@
-import { useNavigate } from "react-router";
-import CardTemplate from "../Cards/Card";
-import useAuth from "../auth/useAuth";
 import Menu from "@/components/MenuPopover";
+import CardSlider from "../Cards/CardSlider";
 
 const Home = () => {
-  const navigate = useNavigate();
-  const { isAuthenticated, logout } = useAuth();
   return (
     <div className="w-full h-full flex items-center flex-col">
       <header
@@ -23,7 +19,7 @@ const Home = () => {
             Get your digitial Business Cards
           </p>
         </div>
-        <CardTemplate />
+        <CardSlider />
       </div>
     </div>
   );
