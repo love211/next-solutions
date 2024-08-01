@@ -30,11 +30,21 @@ import { useParams } from "react-router";
 export function DrawerDialogDemo({ buttonTitle = "Create One" }) {
   const cardId = useParams();
   const [open, setOpen] = React.useState(false);
+  const [mobileDialog, setMobileDialog] = React.useState(false);
   const [preview, setPreview] = React.useState(null);
   const isDesktop = useMediaQuery("(min-width: 768px)");
   const handleClose = () => {
     setPreview(null);
     setOpen(false);
+  };
+  const handleCloseMobileDialog = () => {
+    setMobileDialog(false);
+  };
+  const openPreview = (data) => {
+    setPreview(data);
+    if (data) {
+      setMobileDialog(true);
+    }
   };
 
   if (isDesktop) {
@@ -89,12 +99,15 @@ export function DrawerDialogDemo({ buttonTitle = "Create One" }) {
         <TemplateForm
           className="px-4 max-h-[500px] overflow-y-auto"
           onClose={handleClose}
-          setPreview={setPreview}
+          setPreview={openPreview}
           isPreview={preview ? true : false}
         />
-        {preview && (
-          <Drawer open={preview && !isDesktop} onOpenChange={setOpen}>
-            <DialogContent onClose={handleClose} className="flex max-h-[75%] justify-center">
+        {preview && mobileDialog && (
+          <Drawer open={mobileDialog} onOpenChange={setMobileDialog}>
+            <DialogContent
+              onClose={handleCloseMobileDialog}
+              className="flex max-h-[75%] justify-center"
+            >
               <PreviewTemplate
                 data={preview}
                 cardId={cardId[1]}

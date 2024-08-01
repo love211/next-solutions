@@ -65,7 +65,9 @@ const TemplateForm = ({ className, onClose, setPreview, isPreview }) => {
     }),
     onSubmit: async (values, { setSubmitting }) => {
       try {
-        setPreview(values);
+        if (!isPreview) {
+          setPreview(values);
+        }
         if (isPreview) {
           handleConfirm();
         }
