@@ -17,15 +17,15 @@ const UserCards = () => {
   }, []);
 
   return (
-    <div className="grid h-full grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
-      {cardsData?.map((card) => (
-        <IndividualCardLayout key={card.id}>
-          <div className="flex max-h-[calc(100vh-5rem)">
+    <IndividualCardLayout>
+      <div className="grid h-full grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 p-4">
+        {cardsData?.map((card) => (
+          <div key={card.id} className="flex max-h-[28rem]">
             <PreviewTemplate data={card} cardId={card?.templateId} />
           </div>
-        </IndividualCardLayout>
-      ))}
-    </div>
+        ))}
+      </div>
+    </IndividualCardLayout>
   );
 };
 export default UserCards;

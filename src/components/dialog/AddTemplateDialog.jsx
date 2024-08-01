@@ -61,7 +61,13 @@ export function DrawerDialogDemo({ buttonTitle = "Create One" }) {
               setPreview={setPreview}
               isPreview={preview ? true : false}
             />
-            {preview && <PreviewTemplate data={preview} cardId={cardId[1]} />}
+            {preview && (
+              <PreviewTemplate
+                data={preview}
+                cardId={cardId[1]}
+                customClass={"max-w-[20rem]"}
+              />
+            )}
           </div>
         </DialogContent>
       </Dialog>

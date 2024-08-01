@@ -5,10 +5,13 @@ import { toast } from "react-toastify";
 const AuthGuard = ({ children }) => {
   const location = useLocation();
   const { isAuthenticated, user } = useAuth();
+  
   if (!isAuthenticated) {
     toast.warning("please login");
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
+
+
   return children;
 };
 
