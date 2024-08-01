@@ -1,9 +1,11 @@
 import React from "react";
 import MobileWrapper from "./MobileWrapper";
 import { DrawerDialogDemo } from "@/components/dialog/AddTemplateDialog";
-import { handleOpenLink } from "@/util/cardHelper";
+import { getCardData, handleOpenLink } from "@/util/cardHelper";
 
-const DigitalCard2 = () => {
+const DigitalCard2 = ({ data, isPreview = false }) => {
+  const { name, designation, company, about, phone, email, weblink } =
+    getCardData(data);
   return (
     <div className="w-screen h-screen flex items-center justify-center bg-white ">
       <MobileWrapper>
@@ -12,7 +14,7 @@ const DigitalCard2 = () => {
           py-[4rem] mock-up-1 bg-black px-4 pt-20 pb-4"
         >
           <div className="flex justify-end self-end">
-            <DrawerDialogDemo />
+            {!isPreview && <DrawerDialogDemo />}
           </div>
           <div className=" flex flex-col pb-8 relative top-[2.6rem] left-[3.3rem]">
             <img
@@ -24,16 +26,13 @@ const DigitalCard2 = () => {
           <div className="w-full">
             <div className="gradient-bg h-[6.4rem] relative  text-white rounded-lg p-4 md:w-[19.4rem] ">
               <div className="text-center">
-                <div className="text-xl font-bold">Helen Wilson</div>
-                <div className="text-sm">Marketing Manager</div>
+                <div className="text-xl font-bold">{name}</div>
+                <div className="text-sm">{designation}</div>
               </div>
             </div>
             <div className="mt-4 bg-gray-800 text-white rounded-lg p-4 md:w-[19.4rem] flex flex-col items-center gap-3">
               <h4 className="font-semibold">About Me</h4>
-              <p className="font-light text-base w-52">
-                I'm a highly skilled marketing profession with over 7 years of
-                industry experience.
-              </p>
+              <p className="font-light text-base w-52">{about}</p>
             </div>
             <div className="mt-4 bg-gray-800 text-white rounded-lg p-4 md:w-[19.4rem]">
               <div className="flex items-center mb-2 gap-3">
@@ -49,7 +48,7 @@ const DigitalCard2 = () => {
                     fill="white"
                   />
                 </svg>
-                <span>+91 7846589803</span>
+                <span>{phone}</span>
               </div>
               <div className="flex items-center mb-2 gap-3">
                 <svg
@@ -80,7 +79,7 @@ const DigitalCard2 = () => {
                     handleOpenLink("https://www.nextsolution.net/")
                   }
                 >
-                  helen@nextsolution.com
+                  {email}
                 </span>
               </div>
               <div className="flex items-center gap-3">
@@ -112,7 +111,7 @@ const DigitalCard2 = () => {
                     handleOpenLink("https://www.nextsolution.net/")
                   }
                 >
-                  nextsolution.com
+                  {weblink}
                 </span>
               </div>
             </div>

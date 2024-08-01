@@ -2,8 +2,11 @@ import React from "react";
 import MobileWrapper from "./MobileWrapper";
 import { FaInstagram, FaPaypal } from "react-icons/fa";
 import { BsTwitterX } from "react-icons/bs";
+import { getCardData, handleOpenLink } from "@/util/cardHelper";
 
-const DigitalCard9 = () => {
+const DigitalCard9 = ({ data, isPreview = false }) => {
+  const { name, designation, company, about, phone, email, weblink } =
+    getCardData(data);
   return (
     <MobileWrapper>
       <div
@@ -14,20 +17,32 @@ const DigitalCard9 = () => {
           <p className="text-[#fff] font-bold">HArMOnize</p>
         </div>
         <div className="w-fit h-fit flex flex-col gap-[0.5rem] text-[#191919] text-center">
-          <h1 className="text-3xl font-bold">Hande Erccel</h1>
-          <p>Senior Software Developer</p>
+          <h1 className="text-3xl font-bold">{name}</h1>
+          <p>{designation}</p>
         </div>
         <div className="w-fit h-fit flex flex-col gap-[1rem]">
-          <button className="w-[15rem] h-[3rem] border-2 border-[#A1A1A1] bg-[#f6f4ec] font-bold text-[#191919] shadow-md rounded-full">
+          <button
+            className="w-[15rem] h-[3rem] border-2 border-[#A1A1A1] bg-[#f6f4ec] font-bold text-[#191919] shadow-md rounded-full"
+            onClick={() => handleOpenLink()}
+          >
             Menu
           </button>
-          <button className="w-[15rem] h-[3rem] border-2 border-[#A1A1A1] bg-[#f6f4ec] font-bold text-[#191919] shadow-md rounded-full">
+          <button
+            className="w-[15rem] h-[3rem] border-2 border-[#A1A1A1] bg-[#f6f4ec] font-bold text-[#191919] shadow-md rounded-full"
+            onClick={() => handleOpenLink()}
+          >
             Order online
           </button>
-          <button className="w-[15rem] h-[3rem] border-2 border-[#A1A1A1] bg-[#f6f4ec] font-bold text-[#191919] shadow-md rounded-full">
+          <button
+            className="w-[15rem] h-[3rem] border-2 border-[#A1A1A1] bg-[#f6f4ec] font-bold text-[#191919] shadow-md rounded-full"
+            onClick={() => handleOpenLink()}
+          >
             Our Story
           </button>
-          <button className="w-[15rem] h-[3rem] border-2 border-[#A1A1A1] bg-[#f6f4ec] font-bold text-[#191919] shadow-md rounded-full">
+          <button
+            className="w-[15rem] h-[3rem] border-2 border-[#A1A1A1] bg-[#f6f4ec] font-bold text-[#191919] shadow-md rounded-full"
+            onClick={() => handleOpenLink()}
+          >
             Locations
           </button>
         </div>

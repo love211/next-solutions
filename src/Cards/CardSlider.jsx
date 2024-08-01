@@ -6,7 +6,8 @@ import card2 from "../assets/new1.png";
 import card3 from "../assets/new2.png";
 import card4 from "../assets/image4.png";
 import card5 from "../assets/image2.png"
-import card6 from "../assets/Mock2.png"
+import card6 from "../assets/new/image01.png"
+import card7 from "../assets/new/image02.png"
 import { useNavigate } from "react-router";
 
 let slideCss =
@@ -60,8 +61,14 @@ const CardSlider = () => {
           <div onClick={() => navigate("/template/5")}>
             <img src={card5} className={slideCss} alt="" />
           </div>
-          <div onClick={() => navigate("/template/5")}>
+          <div onClick={() => navigate("/template/6")}>
             <img src={card6} className={slideCss} alt="" />
+          </div>
+          <div onClick={() => navigate("/template/7")}>
+            <img src={card7} className={slideCss} alt="" />
+          </div>
+          <div onClick={() => navigate("/template/8")}>
+            <img src={card7} className={slideCss} alt="" />
           </div>
         </Slider>
       </div>
