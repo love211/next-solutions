@@ -2,7 +2,8 @@ import { FaCaretRight, FaPhoneAlt, FaRegEnvelope } from "react-icons/fa";
 import MobileWrapper from "./MobileWrapper";
 import profile from "../assets/img1.png";
 import { BsBrowserEdge } from "react-icons/bs";
-import { handleOpenLink } from "@/util/cardHelper";
+import { getCardData, handleOpenLink } from "@/util/cardHelper";
+import { DrawerDialogDemo } from "@/components/dialog/AddTemplateDialog";
 const Article = () => (
   <div className="flex gap-4 w-full card-article justify-center items-center">
     <div className="bg-[#8FA855] h-12 w-12 flex items-center justify-center rounded-lg">
@@ -28,19 +29,21 @@ const Article = () => (
     </div>
   </div>
 );
-const DigitalCard6 = () => {
+const DigitalCard6 = ({ data, isPreview = false }) => {
+  const { name, designation, company, about, phone, email, weblink } =
+    getCardData(data);
   return (
     <MobileWrapper>
       <div className="flex flex-col max-w-[24.313rem]">
         <div className="relative">
-         
+          {!isPreview && <DrawerDialogDemo />}
           <div>
             <img src={profile} className="w-full" />
           </div>
           <div className="absolute w-[85%] z-[1] right-0 left-0 mx-auto bottom-[34px] bg-green-900 bg-opacity-50 p-[20px] text-center text-white gap-5">
             <div className="flex flex-col gap-[6px]">
-              <h4 className="text-2xl font-bold capitalize">helen Wilson </h4>
-              <h6 className="text-[16px] font-normal"> Marketing Manager</h6>
+              <h4 className="text-2xl font-bold capitalize">{name} </h4>
+              <h6 className="text-[16px] font-normal"> {designation}</h6>
             </div>
             <p className="break-words text-[14px] font-normal">
               Loreum ipsum dolor sit amet consecturo Loreum ipsum dolor sit amet
@@ -53,7 +56,7 @@ const DigitalCard6 = () => {
           <h5 className="text-center text-white font-work-sans font-bold capitalize text-xl">
             Web links{" "}
           </h5>
-           {/* <DrawerDialogDemo /> */}
+          {/* <DrawerDialogDemo /> */}
           <p className="text-center">
             Loreum ipsum dolor sit amet consecturo Loreum ipsum dolor sit amet
             consecturoLoreum ipsum dolor sit amet consecturo

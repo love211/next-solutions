@@ -10,11 +10,10 @@ import apiService from "@/api/axios";
 import { apiEndpoints } from "@/api/apiEndPoint";
 import useAuth from "@/auth/useAuth";
 import { toast } from "react-toastify";
-import PreviewTemplate from "@/digitalCards/PreviewTemplate";
+import parsePhoneNumberFromString from "libphonenumber-js";
 
 const TemplateForm = ({ className, onClose, setPreview, isPreview }) => {
   const { user } = useAuth();
-  const [submit, setSubmit] = useState(false);
   const cardId = useParams();
   const formik = useFormik({
     initialValues: {
@@ -31,15 +30,24 @@ const TemplateForm = ({ className, onClose, setPreview, isPreview }) => {
       designation: Yup.string().required("Designation is required"),
       company: Yup.string().required("Company is required"),
       about: Yup.string().required("About Me is required"),
-      phone: Yup.string().required("Phone is required"),
+      phone: Yup.string()
+        .test(
+          "is-valid-phone",
+          "Invalid phone number, enter correct country code",
+          (value) => {
+            if (!value) return false;
+            const phoneNumber = parsePhoneNumberFromString(value);
+            return phoneNumber ? phoneNumber.isValid() : false;
+          }
+        )
+        .required("Contact number is Required"),
       email: Yup.string()
         .email("Invalid email address")
         .required("Email is required"),
-      weblink: Yup.string().url("Invalid URL").required("Web link is required"),
+      weblink: Yup.string().required("Web link is required"),
     }),
     onSubmit: async (values, { setSubmitting }) => {
       try {
-        console.log("hi preview");
         setPreview(values);
         if (isPreview) {
           handleConfirm();
@@ -47,8 +55,6 @@ const TemplateForm = ({ className, onClose, setPreview, isPreview }) => {
       } catch (error) {
         setSubmitting(false);
       }
-
-      // Handle form submission
     },
   });
 
@@ -78,9 +84,9 @@ const TemplateForm = ({ className, onClose, setPreview, isPreview }) => {
   };
   return (
     <FormikProvider value={formik.values}>
-      <div className="flex w-full h-full">
+      <div className={`flex w-full h-full ${className}`}>
         <Form
-          className={`flex flex-col gap-8 w-full ${className} `}
+          className={`flex flex-col gap-8 w-full py-4`}
           onSubmit={formik.handleSubmit}
         >
           <div className="flex flex-col gap-2">

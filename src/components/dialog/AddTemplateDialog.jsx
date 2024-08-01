@@ -25,7 +25,10 @@ import useMediaQuery from "@/hooks/useMediaQuery";
 import AddUserButton from "../AddUserButton";
 import TemplateForm from "./UserForm";
 import PreviewTemplate from "../../digitalCards/PreviewTemplate";
+import { useParams } from "react-router";
+
 export function DrawerDialogDemo({ buttonTitle = "Create One" }) {
+  const cardId = useParams();
   const [open, setOpen] = React.useState(false);
   const [preview, setPreview] = React.useState(null);
   const isDesktop = useMediaQuery("(min-width: 768px)");
@@ -42,10 +45,9 @@ export function DrawerDialogDemo({ buttonTitle = "Create One" }) {
           <AddUserButton />
         </DialogTrigger>
         <DialogContent
-          className={`sm:max-w-[900px] max-h-[90%]`}
+          className={`max-w-[80%] lg:max-w-[56.25rem] w-full max-h-[90%] h-full`}
           onClose={handleClose}
         >
-          {/* <DialogContent className="sm:max-w-[425px] max-h-[700px] lg:max-h-full"> */}
           <DialogHeader>
             <DialogTitle>Create Business Card</DialogTitle>
             <DialogDescription>
@@ -59,7 +61,13 @@ export function DrawerDialogDemo({ buttonTitle = "Create One" }) {
               setPreview={setPreview}
               isPreview={preview ? true : false}
             />
-            {preview && <PreviewTemplate data={preview} />}
+            {preview && (
+              <PreviewTemplate
+                data={preview}
+                cardId={cardId[1]}
+                customClass={"max-w-[20rem]"}
+              />
+            )}
           </div>
         </DialogContent>
       </Dialog>
@@ -81,7 +89,20 @@ export function DrawerDialogDemo({ buttonTitle = "Create One" }) {
         <TemplateForm
           className="px-4 max-h-[500px] overflow-y-auto"
           onClose={handleClose}
+          setPreview={setPreview}
+          isPreview={preview ? true : false}
         />
+        {preview && (
+          <Drawer open={preview && !isDesktop} onOpenChange={setOpen}>
+            <DialogContent onClose={handleClose} className="flex max-h-[75%] justify-center">
+              <PreviewTemplate
+                data={preview}
+                cardId={cardId[1]}
+                customClass={""}
+              />
+            </DialogContent>
+          </Drawer>
+        )}
         <DrawerFooter className="pt-2">
           <DrawerClose asChild>
             <Button variant="outline">Cancel</Button>

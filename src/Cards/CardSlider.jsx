@@ -10,7 +10,7 @@ import { useNavigate } from "react-router";
 
 let slideCss =
   "h-auto xl:h-[33.625rem] w-[18.625rem] px-2 md:px-4 cursor-pointer";
-const CardTemplate = () => {
+const CardSlider = () => {
   const navigate = useNavigate();
   const settings = {
     dots: true,
@@ -65,4 +65,4 @@ const CardTemplate = () => {
   );
 };
 
-export default CardTemplate;
+export default CardSlider;

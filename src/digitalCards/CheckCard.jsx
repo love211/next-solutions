@@ -1,18 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import MobileWrapper from "./MobileWrapper";
 import UserImg from "../assets/user.png";
 import { BsTelephone } from "react-icons/bs";
 import { CiGlobe } from "react-icons/ci";
 import { MdInsertLink, MdOutlineMailOutline } from "react-icons/md";
-import AddUserButton from "../components/AddUserButton";
 import { DrawerDialogDemo } from "@/components/dialog/AddTemplateDialog";
-import { Link } from "react-router-dom";
-import { handleOpenLink } from "@/util/cardHelper";
+import { getCardData, handleOpenLink } from "@/util/cardHelper";
+import { insertZeroWidthSpace } from "@/util/commonFn";
 
-
-const CardCheque = () => {
-  const [open, setOpen] = useState(false);
-
+const CardCheque = ({ data, isPreview = false }) => {
+  const { name, designation, company, about, phone, email, weblink } =
+    getCardData(data);
   return (
     <>
       <MobileWrapper>
@@ -20,8 +18,7 @@ const CardCheque = () => {
           {/* 1st Section */}
           <div className="w-full flex flex-col items-center justify-start gap-[2.5rem]">
             <div className="w-full flex flex-col items-center gap-[1.5rem]">
-              {/* <AddUserButton onClick={() => setOpen(true)} /> */}
-              <DrawerDialogDemo />
+              {!isPreview && <DrawerDialogDemo />}
               <div className="w-[10.875rem] h-[10.875rem] border-[#fff] boder-4">
                 <img
                   src={UserImg}
@@ -31,10 +28,10 @@ const CardCheque = () => {
               </div>
               <div className="w-full flex flex-col items-center text-center text-white">
                 <p className="text-2xl font-extrabold drop-shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
-                  Smrita Smith
+                  {name}
                 </p>
-                <p>Marketing Expert</p>
-                <p>ABC Company</p>
+                <p>{designation}</p>
+                <p>{company}</p>
               </div>
             </div>
             <div
@@ -42,10 +39,7 @@ const CardCheque = () => {
        bg-[rgba(6,76,122,1)]"
             >
               <p className="font-bold">About Me</p>
-              <p>
-                I'm a highly skilled marketing profession with over 7 years of
-                industry experience.
-              </p>
+              <p>{about}</p>
             </div>
             <div
               className="w-full h-[9.9375rem]  flex flex-col items-center text-white text-center
@@ -56,7 +50,7 @@ const CardCheque = () => {
                   <BsTelephone className="fill-[rgba(3,6,45,1)]" />
                 </div>
                 <div className="w-full h-full px-4 flex items-center justify-start">
-                  <p className="text-black">+91 7846589803</p>
+                  <p className="text-black">{phone}</p>
                 </div>
               </button>
               <button className="w-full h-[3.3125rem] px-4  flex items-start border-b border-b-[rgba(51,81,114,0.30)]">
@@ -69,7 +63,7 @@ const CardCheque = () => {
                     handleOpenLink("https://www.nextsolution.net/")
                   }
                 >
-                  <p className="text-black">helen@nextsolution.com</p>
+                  <p className="text-black">{email}</p>
                 </div>
               </button>
               <button className="w-full h-[3.3125rem]  px-4 flex items-start border-b border-b-[rgba(51,81,114,0.30)]">
@@ -82,7 +76,7 @@ const CardCheque = () => {
                     handleOpenLink("https://www.nextsolution.net/")
                   }
                 >
-                  <p className="text-black">nextsolution.com</p>
+                  <p className="text-black">{insertZeroWidthSpace(weblink)}</p>
                 </div>
               </button>
             </div>

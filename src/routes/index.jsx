@@ -6,11 +6,19 @@ import AuthGuard from "../auth/AuthGuard";
 import SignUpPage from "../pages/auth/SignUp";
 import PrivateLayout from "../layout/PrivateLayout";
 import UserCards from "@/pages/UserCards";
+import GuestGuard from "@/auth/GuestGuard";
 
 const RoutesProvider = () => (
   <Routes>
     <Route path="/" element={<Home />} />
-    <Route path="/login" element={<LoginPage />} />
+    <Route
+      path="/login"
+      element={
+        <GuestGuard>
+          <LoginPage />
+        </GuestGuard>
+      }
+    />
     <Route path="/sign-up" element={<SignUpPage />} />
     <Route
       element={

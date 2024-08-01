@@ -29,7 +29,7 @@ export const getCardsByUserData = (userId) => async (dispatch) => {
 
     console.log('response', response.data.data)
     dispatch(setCards(response.data.data));
-    dispatch(setLoading(true));
+    dispatch(setLoading(false));
   } catch (error) {
     dispatch(setLoading(false));
   }
