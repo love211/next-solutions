@@ -46,7 +46,6 @@ export function DrawerDialogDemo({ buttonTitle = "Create One" }) {
       setMobileDialog(true);
     }
   };
-
   if (isDesktop) {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
