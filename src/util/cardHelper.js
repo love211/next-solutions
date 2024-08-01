@@ -1,4 +1,4 @@
-export const handleOpenLink = (url) => {
+export const handleOpenLink = (url = "https://www.nextsolution.net/") => {
   window.open(url, "_blank", "noopener,noreferrer");
 };
 export const getCardData = (data) => ({

@@ -15,9 +15,9 @@ export let cardToRender = {
   3: DigitalCard6,
   4: DigitalCard2,
   5: DigitalCard3,
-  6: CardWave,
-  7: CardCheque,
-  8: DigitalCard7,
+  6: DigitalCard7,
+  7: DigitalCard8,
+  8: DigitalCard9,
   9: DigitalCard8,
   10: DigitalCard9,
 };

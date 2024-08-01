@@ -12,6 +12,23 @@ import useAuth from "@/auth/useAuth";
 import { toast } from "react-toastify";
 import parsePhoneNumberFromString from "libphonenumber-js";
 
+function removeCountryCode(phoneNumber) {
+  // Check if the phone number starts with a country code '+'
+  if (phoneNumber.startsWith("+")) {
+    // Remove the first three characters
+    return phoneNumber.substring(3);
+  } else {
+    // If the phone number does not start with '+', return it as is
+    return phoneNumber;
+  }
+}
+function getUrl(url) {
+  let protocol = "https://";
+  if (url.includes(".")) {
+    return protocol + url;
+  }
+  return protocol + url + ".com";
+}
 const TemplateForm = ({ className, onClose, setPreview, isPreview }) => {
   const { user } = useAuth();
   const cardId = useParams();
@@ -70,8 +87,8 @@ const TemplateForm = ({ className, onClose, setPreview, isPreview }) => {
           email: values.email,
           company: values.company,
           designation: values.designation,
-          phone: values.phone,
-          weblinks: values.weblink,
+          phone: removeCountryCode(values.phone),
+          weblinks: getUrl(values.weblink),
           about_me: values.about,
         },
       });

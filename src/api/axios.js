@@ -15,7 +15,7 @@ apiService.interceptors.response.use(
     if (error.response) {
       switch (error.response.status) {
         case 400:
-          toast.error("Bad Request (400)");
+          toast.error(error.response.data.message || "Bad Request (400)");
           break;
         case 401:
           toast.error(error.response.data.message || "Unauthorized (401)");
