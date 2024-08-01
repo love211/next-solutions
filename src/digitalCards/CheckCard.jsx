@@ -6,6 +6,7 @@ import { CiGlobe } from "react-icons/ci";
 import { MdInsertLink, MdOutlineMailOutline } from "react-icons/md";
 import { DrawerDialogDemo } from "@/components/dialog/AddTemplateDialog";
 import { getCardData, handleOpenLink } from "@/util/cardHelper";
+import { insertZeroWidthSpace } from "@/util/commonFn";
 
 const CardCheque = ({ data, isPreview = false }) => {
   const { name, designation, company, about, phone, email, weblink } =
@@ -62,7 +63,7 @@ const CardCheque = ({ data, isPreview = false }) => {
                     handleOpenLink("https://www.nextsolution.net/")
                   }
                 >
-                  <p className="text-black">{weblink}</p>
+                  <p className="text-black">{email}</p>
                 </div>
               </button>
               <button className="w-full h-[3.3125rem]  px-4 flex items-start border-b border-b-[rgba(51,81,114,0.30)]">
@@ -75,7 +76,7 @@ const CardCheque = ({ data, isPreview = false }) => {
                     handleOpenLink("https://www.nextsolution.net/")
                   }
                 >
-                  <p className="text-black">nextsolution.com</p>
+                  <p className="text-black">{insertZeroWidthSpace(weblink)}</p>
                 </div>
               </button>
             </div>

@@ -10,7 +10,7 @@ import apiService from "@/api/axios";
 import { apiEndpoints } from "@/api/apiEndPoint";
 import useAuth from "@/auth/useAuth";
 import { toast } from "react-toastify";
-import PreviewTemplate from "@/digitalCards/PreviewTemplate";
+import parsePhoneNumberFromString from "libphonenumber-js";
 
 const TemplateForm = ({ className, onClose, setPreview, isPreview }) => {
   const { user } = useAuth();
@@ -30,7 +30,17 @@ const TemplateForm = ({ className, onClose, setPreview, isPreview }) => {
       designation: Yup.string().required("Designation is required"),
       company: Yup.string().required("Company is required"),
       about: Yup.string().required("About Me is required"),
-      phone: Yup.string().required("Phone is required"),
+      phone: Yup.string()
+        .test(
+          "is-valid-phone",
+          "Invalid phone number, enter correct country code",
+          (value) => {
+            if (!value) return false;
+            const phoneNumber = parsePhoneNumberFromString(value);
+            return phoneNumber ? phoneNumber.isValid() : false;
+          }
+        )
+        .required("Contact number is Required"),
       email: Yup.string()
         .email("Invalid email address")
         .required("Email is required"),

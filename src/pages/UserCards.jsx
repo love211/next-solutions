@@ -1,6 +1,7 @@
 import { apiEndpoints } from "@/api/apiEndPoint";
 import apiService from "@/api/axios";
 import useAuth from "@/auth/useAuth";
+import IndividualCardLayout from "@/components/TemplateLayout";
 import PreviewTemplate from "@/digitalCards/PreviewTemplate";
 import { getCardsByUserData } from "@/redux/slices/templateSlice";
 import { useEffect } from "react";
@@ -18,7 +19,11 @@ const UserCards = () => {
   return (
     <div className="grid h-full grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
       {cardsData?.map((card) => (
-        <PreviewTemplate key={card.id} data={card} />
+        <IndividualCardLayout key={card.id}>
+          <div className="flex max-h-[calc(100vh-5rem)">
+            <PreviewTemplate data={card} cardId={card?.templateId} />
+          </div>
+        </IndividualCardLayout>
       ))}
     </div>
   );

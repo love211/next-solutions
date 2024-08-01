@@ -2,9 +2,8 @@ import React from "react";
 import { useParams } from "react-router";
 import { cardToRender } from "@/pages/Template";
 
-const PreviewTemplate = ({ data }) => {
-  const cardId = useParams();
-  const PreviewCard = cardToRender[cardId[1]];
+const PreviewTemplate = ({ data, cardId }) => {
+  const PreviewCard = cardToRender[cardId];
   if (!PreviewCard) {
     return <div> card not found</div>;
   }

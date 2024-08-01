@@ -6,6 +6,7 @@ import { CiGlobe } from "react-icons/ci";
 import { MdInsertLink, MdOutlineMailOutline } from "react-icons/md";
 import { DrawerDialogDemo } from "@/components/dialog/AddTemplateDialog";
 import { getCardData, handleOpenLink } from "@/util/cardHelper";
+import { insertZeroWidthSpace } from "@/util/commonFn";
 
 const CardWave = ({ data, isPreview = false }) => {
   console.log("data", data);
@@ -71,7 +72,7 @@ const CardWave = ({ data, isPreview = false }) => {
                 className="w-full h-full px-4 flex items-center justify-start bg-[rgba(51,81,114,0.3)]"
                 onClick={() => handleOpenLink("https://www.nextsolution.net/")}
               >
-                <p className="text-white">{weblink}</p>
+                <p className="text-white">{insertZeroWidthSpace(weblink)}</p>
               </div>
             </button>
           </div>

@@ -25,9 +25,10 @@ import useMediaQuery from "@/hooks/useMediaQuery";
 import AddUserButton from "../AddUserButton";
 import TemplateForm from "./UserForm";
 import PreviewTemplate from "../../digitalCards/PreviewTemplate";
-
+import { useParams } from "react-router";
 
 export function DrawerDialogDemo({ buttonTitle = "Create One" }) {
+  const cardId = useParams();
   const [open, setOpen] = React.useState(false);
   const [preview, setPreview] = React.useState(null);
   const isDesktop = useMediaQuery("(min-width: 768px)");
@@ -60,7 +61,7 @@ export function DrawerDialogDemo({ buttonTitle = "Create One" }) {
               setPreview={setPreview}
               isPreview={preview ? true : false}
             />
-            {preview && <PreviewTemplate data={preview} />}
+            {preview && <PreviewTemplate data={preview} cardId={cardId[1]} />}
           </div>
         </DialogContent>
       </Dialog>

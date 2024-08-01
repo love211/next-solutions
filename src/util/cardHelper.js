@@ -22,5 +22,6 @@ export const convertCardData = (apiResponse) => {
     phone: api.phone,
     email: api.email,
     weblink: api.weblinks, // Mapping 'weblinks' to 'weblink'
+    templateId: api.template_id,
   }));
 };
