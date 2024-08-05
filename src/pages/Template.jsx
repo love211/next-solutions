@@ -11,6 +11,8 @@ import DigitalCard9 from "@/digitalCards/DigitalCard9";
 import DigitalCardNew1 from "@/digitalCards/DigitalCardNew1";
 import DigitalCardNew2 from "@/digitalCards/DigitalCardNew2";
 import DigitalCardNew3 from "@/digitalCards/DigitalCardNew3";
+import DigitalCArdNew4 from "@/digitalCards/DigitalCardNew4";
+import DigitalCardNew5 from "@/digitalCards/DigitalCardNew5";
 
 export let cardToRender = {
   1: CardWave,
@@ -26,6 +28,8 @@ export let cardToRender = {
   11: DigitalCardNew1,
   12: DigitalCardNew2,
   13: DigitalCardNew3,
+  14: DigitalCArdNew4,
+  15: DigitalCardNew5,
 };
 const Template = () => {
   const cardId = useParams();
