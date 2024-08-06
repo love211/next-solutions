@@ -1,13 +1,26 @@
 import PreviewTemplate from "@/digitalCards/PreviewTemplate";
 import { CustomDrawer } from "../custom-ui/Drawer";
+import { useNavigate } from "react-router";
+import { PATH } from "@/routes/path";
 
 const TemplateDrawer = ({ open, onClose, data }) => {
+  const navigate = useNavigate();
   let { title = "", description = "", id = null } = data || {};
 
   let template = id ? (
-<PreviewTemplate data={{}} cardId={id} customClass={"max-h-[200px] w-fit max-w-fit"} />
+    <PreviewTemplate
+      data={{}}
+      cardId={id}
+      customClass={"max-h-[200px] w-fit max-w-fit"}
+    />
   ) : null;
 
+  const handleCreate = () => {
+    console.log("title", title);
+    navigate(PATH.templateForm.root(data.title.replace(/\s+/g, "")), {
+      state: { data: data.id },
+    });
+  };
   return (
     <CustomDrawer
       open={open}
@@ -15,6 +28,7 @@ const TemplateDrawer = ({ open, onClose, data }) => {
       title={title}
       description={description}
       content={template}
+      onCreate={handleCreate}
     />
   );
 };

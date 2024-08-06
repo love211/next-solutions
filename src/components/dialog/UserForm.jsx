@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Form, FormikProvider, useFormik } from "formik";
 import * as Yup from "yup";
-import cn from "classnames";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
@@ -11,6 +10,7 @@ import { apiEndpoints } from "@/api/apiEndPoint";
 import useAuth from "@/auth/useAuth";
 import { toast } from "react-toastify";
 import parsePhoneNumberFromString from "libphonenumber-js";
+import { cn } from "@/lib/utils";
 
 function removeCountryCode(phoneNumber) {
   // Check if the phone number starts with a country code '+'
@@ -32,6 +32,8 @@ function getUrl(url) {
 const TemplateForm = ({ className, onClose, setPreview, isPreview }) => {
   const { user } = useAuth();
   const cardId = useParams();
+  const [profilePhoto, setProfilePhoto] = useState(null);
+  const [preview, setPreviewImage] = useState(null);
   const formik = useFormik({
     initialValues: {
       name: "abc@example.com",
@@ -101,13 +103,50 @@ const TemplateForm = ({ className, onClose, setPreview, isPreview }) => {
       setSubmitting(false);
     }
   };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setProfilePhoto(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreviewImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
   return (
     <FormikProvider value={formik.values}>
-      <div className={`flex w-full h-full ${className}`}>
+      <div className={(cn("flex w-full h-full"), className)}>
         <Form
           className={`flex flex-col gap-8 w-full py-4`}
           onSubmit={formik.handleSubmit}
         >
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="profilePhoto">Profile Photo</Label>
+            <input
+              type="file"
+              id="profilePhoto"
+              accept="image/*"
+              onChange={handleImageChange}
+              className="hidden"
+            />
+            <div className="flex items-center justify-center mt-2">
+              <label htmlFor="profilePhoto" className="cursor-pointer">
+                <div className="w-24 h-24 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
+                  {preview ? (
+                    <img
+                      src={preview}
+                      alt="Profile Preview"
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <span className="text-gray-400">Upload</span>
+                  )}
+                </div>
+              </label>
+            </div>
+          </div>
           <div className="flex flex-col gap-2">
             <Label htmlFor="name">Name</Label>
             <Input type="text" id="name" {...formik.getFieldProps("name")} />
@@ -156,13 +195,13 @@ const TemplateForm = ({ className, onClose, setPreview, isPreview }) => {
             ) : null}
           </div>
 
-          <div className="flex flex-col gap-2">
+          {/* <div className="flex flex-col gap-2">
             <Label htmlFor="weblink">Web Links</Label>
             <Input id="weblink" {...formik.getFieldProps("weblink")} />
             {formik.touched.weblink && formik.errors.weblink ? (
               <div className="text-red-500">{formik.errors.weblink}</div>
             ) : null}
-          </div>
+          </div> */}
 
           <div className="flex justify-center">
             <Button type="submit">

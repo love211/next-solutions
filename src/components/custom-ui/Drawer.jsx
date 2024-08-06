@@ -65,6 +65,7 @@ export let drawerVariants = {
 export function CustomDrawer({
   open,
   setOpen,
+  onCreate,
   title,
   description,
   content,
@@ -85,6 +86,9 @@ export function CustomDrawer({
               {title}
             </DrawerTitle>
             <DrawerDescription>{description}</DrawerDescription>
+            <Button className="rounded-full max-w-32" onClick={onCreate}>
+              Create One{" "}
+            </Button>
           </DrawerHeader>
           <div className="p-4 pb-0">{content}</div>
           {/* <DrawerFooter>

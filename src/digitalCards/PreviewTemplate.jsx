@@ -6,7 +6,7 @@ const PreviewTemplate = ({ data, cardId, customClass }) => {
   const PreviewCard = cardToRender[cardId];
   if (!PreviewCard) {
     return (
-      <div>
+      <div className={customClass}>
         {" "}
         <NoData />
       </div>
