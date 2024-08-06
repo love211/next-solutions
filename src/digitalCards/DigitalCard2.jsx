@@ -7,7 +7,7 @@ const DigitalCard2 = ({ data, isPreview = false }) => {
   const { name, designation, company, about, phone, email, weblink } =
     getCardData(data);
   return (
-    <div className="w-screen h-screen flex items-center justify-center bg-white ">
+    // <div className="w-screen h-screen flex items-center justify-center bg-white ">
       <MobileWrapper>
         <div
           className="relative w-full max-w-[24.75rem]  flex flex-col gap-[3.18rem]
@@ -118,7 +118,7 @@ const DigitalCard2 = ({ data, isPreview = false }) => {
           </div>
         </div>
       </MobileWrapper>
-    </div>
+    // </div>
   );
 };
 

@@ -1,10 +1,27 @@
 import Menu from "@/components/MenuPopover";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import CardGrid from "@/components/home/CardsGrid";
 import SideFilters from "@/components/home/SideFilters";
+import { CustomDrawer } from "@/components/custom-ui/Drawer";
+import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import PreviewTemplate from "@/digitalCards/PreviewTemplate";
+import TemplateDrawer from "@/components/home/TemplateDrawer";
 
 const Home = () => {
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const handleOpenDrawer = (data) => {
+    setSearchParams({ id: data.id });
+    navigate(`/?id=${encodeURIComponent(data.id)}`);
+    setOpen(true);
+    setSelectedCard(data);
+  };
+  console.log("searchParams", open);
+
   return (
     <div className="w-full max-w-screen h-full px-[1rem] lg:px-[3rem] flex flex-col items-center overflow-y-auto pb-[2rem]">
       <header
@@ -40,9 +57,10 @@ const Home = () => {
           {/* Browsed By */}
           <SideFilters />
           <div className="w-full flex items-center justify-center">
-            <CardGrid />
+            <CardGrid onView={handleOpenDrawer} />
           </div>
         </div>
+        <TemplateDrawer open={open} onClose={setOpen} data={selectedCard} />
       </div>
     </div>
   );

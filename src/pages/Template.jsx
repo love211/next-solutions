@@ -15,10 +15,10 @@ import DigitalCArdNew4 from "@/digitalCards/DigitalCardNew4";
 import DigitalCardNew5 from "@/digitalCards/DigitalCardNew5";
 
 export let cardToRender = {
-  1: CardWave,
+  1: DigitalCard2,
   2: CardCheque,
   3: DigitalCard6,
-  4: DigitalCard2,
+  4: CardWave,
   5: DigitalCard3,
   6: DigitalCard7,
   7: DigitalCard8,

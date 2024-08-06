@@ -9,14 +9,76 @@ import card8 from "../assets/newmock2.png";
 import card9 from "../assets/newmockup3.png";
 
 export let mockupData = [
-  { title: "Create One", image: card1, link: "" },
-  { title: "Create One", image: card2, link: "" },
-  { title: "Create One", image: card3, link: "" },
-  { title: "Create One", image: card4, link: "" },
-  { title: "Create One", image: card5, link: "" },
-  { title: "Create One", image: card6, link: "" },
-  { title: "Create One", image: card7, link: "" },
-  { title: "Create One", image: card8, link: "" },
-  { title: "Create One", image: card9, link: "" },
-
+  {
+    title: "The Louden Template",
+    image: card1,
+    link: "/template/1",
+    id: 1,
+    description:
+      "A beautiful front page for MUA influencers sharing tutorial videos, showcasing their favourite products, and sharing referral codes.",
+  },
+  {
+    title: "The Elegance Template",
+    image: card2,
+    link: "/template/2",
+    id: 2,
+    description:
+      "An elegant template perfect for fashion bloggers looking to share their latest outfits, style tips, and brand collaborations.",
+  },
+  {
+    title: "The Tech Savvy Template",
+    image: card3,
+    link: "/template/3",
+    id: 3,
+    description:
+      "Ideal for tech reviewers and bloggers to showcase gadget reviews, tech news, and unboxing videos.",
+  },
+  {
+    title: "The Gourmet Template",
+    image: card4,
+    link: "/template/4",
+    id: 4,
+    description:
+      "A delightful template for food bloggers sharing recipes, cooking tips, and restaurant reviews.",
+  },
+  {
+    title: "The Wanderlust Template",
+    image: card5,
+    link: "/template/5",
+    id: 5,
+    description:
+      "Perfect for travel bloggers to document their adventures, share travel guides, and post stunning travel photos.",
+  },
+  {
+    title: "The Fitness Pro Template",
+    image: card6,
+    link: "/template/6",
+    id: 6,
+    description:
+      "Great for fitness enthusiasts to share workout routines, nutrition tips, and fitness challenges.",
+  },
+  {
+    title: "The Creative Mind Template",
+    image: card7,
+    link: "/template/7",
+    id: 7,
+    description:
+      "Designed for artists and creatives to showcase their portfolios, share their creative process, and sell their artworks.",
+  },
+  {
+    title: "The Business Guru Template",
+    image: card8,
+    link: "/template/8",
+    id: 8,
+    description:
+      "Ideal for business coaches and consultants to offer services, share industry insights, and post client testimonials.",
+  },
+  {
+    title: "The Lifestyle Guru Template",
+    image: card9,
+    link: "/template/9",
+    id: 9,
+    description:
+      "A versatile template for lifestyle bloggers to share daily tips, personal stories, and lifestyle hacks.",
+  },
 ];
