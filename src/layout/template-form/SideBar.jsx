@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from "react-router";
 let sideBarItemsData = [
   { icon: FaLink, label: "Personal", link: PATH.templateForm.personalInfo },
   { icon: FaLink, label: "Links", link: PATH.templateForm.links },
-  { icon: FaStore, label: "Shop", link: "/shop" },
+  { icon: FaStore, label: "Social", link: "/shop" },
   { icon: FaPalette, label: "Appearance", link: PATH.templateForm.appearance },
   { icon: FaChartBar, label: "analytics", link: "/analytics" },
 ];
