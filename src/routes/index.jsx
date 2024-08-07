@@ -10,6 +10,7 @@ import GuestGuard from "@/auth/GuestGuard";
 import PersonalInfo from "@/components/template-generation/form/PersonalInfo";
 import Appearance from "@/components/template-generation/form/Appearance";
 import TemplateGenerationLayout from "@/layout/template-form/TemplateGenerationLayout";
+import Links from "@/components/template-generation/form/Links";
 
 const RoutesProvider = () => (
   <Routes>
@@ -48,7 +49,7 @@ const RoutesProvider = () => (
         />
         <Route
           path="/template/:templatename/form/links"
-          element={<PersonalInfo />}
+          element={<Links />}
         />
         <Route
           path="/template/:templatename/form/appearance"

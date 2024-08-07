@@ -26,7 +26,7 @@ const Home = () => {
     <div className="w-full max-w-screen h-full px-[1rem] lg:px-[3rem] flex flex-col items-center overflow-y-auto pb-[2rem]">
       <header
         id="header"
-        className="sticky top-[2rem] w-full h-[7rem] flex items-center justify-end px-6 py-2
+        className="sticky top-[2rem] w-full h-[3.7rem] flex items-center justify-end px-6 py-2
         border-[#1B1D1A] rounded-[10px] bg-white z-50"
       >
         <div className="w-full h-full flex justify-between gap-4">

@@ -38,7 +38,7 @@ export default function SideBar() {
   const onNavigate = (link) =>
     navigate(basePath + link, { state: location.state });
   return (
-    <div className="flex flex-col w-[20%] p-4 bg-white rounded-3xl sticky top-0">
+    <div className="flex flex-col w-[14rem] h-[calc(100vh-5rem)] px-4 py-8 bg-white rounded-3xl">
       {/* Sidebar content here */}
       <h2 className="text-lg font-bold mb-4 bg-white">Sidebar</h2>
       <div className="flex flex-col bg-gray-50 p-4 rounded-3xl">

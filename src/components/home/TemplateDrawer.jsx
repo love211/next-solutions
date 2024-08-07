@@ -11,12 +11,11 @@ const TemplateDrawer = ({ open, onClose, data }) => {
     <PreviewTemplate
       data={{}}
       cardId={id}
-      customClass={"max-h-[200px] w-fit max-w-fit"}
+      customClass={"h-fit w-fit max-w-fit py-[2rem]"}
     />
   ) : null;
 
   const handleCreate = () => {
-    console.log("title", title);
     navigate(PATH.templateForm.root(data.title.replace(/\s+/g, "")), {
       state: { data: data.id },
     });

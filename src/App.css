@@ -1,5 +1,8 @@
 #root {
-  height: 100vh;
+  height: auto;
+}
+body {
+  background-color:#F3F3F1;
 }
 
 .slick-prev,
@@ -104,4 +107,8 @@
   left: 0;
   background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/23618/rip.svg) bottom;
   background-size: 200%;
+}
+
+[vaul-drawer][vaul-drawer-direction=bottom]::after{
+  height: auto!important;
 }

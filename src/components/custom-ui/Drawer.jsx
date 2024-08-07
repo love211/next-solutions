@@ -15,48 +15,6 @@ import {
 } from "@/components/ui/drawer";
 import { MinusIcon, PlusIcon } from "@heroicons/react/20/solid";
 
-const data = [
-  {
-    goal: 400,
-  },
-  {
-    goal: 300,
-  },
-  {
-    goal: 200,
-  },
-  {
-    goal: 300,
-  },
-  {
-    goal: 200,
-  },
-  {
-    goal: 278,
-  },
-  {
-    goal: 189,
-  },
-  {
-    goal: 239,
-  },
-  {
-    goal: 300,
-  },
-  {
-    goal: 200,
-  },
-  {
-    goal: 278,
-  },
-  {
-    goal: 189,
-  },
-  {
-    goal: 349,
-  },
-];
-
 export let drawerVariants = {
   medium: "70%",
   small: "50%",
@@ -74,23 +32,28 @@ export function CustomDrawer({
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerContent
-        className={`min-h-[${drawerVariants[variant]}] overflow-y-auto`}
+        className={`min-h-[${drawerVariants[variant]}] max-h-[80%] overflow-y-auto`}
       >
-        <div className="w-full flex">
+        <div className="w-full flex lg:flex-row flex-col h-fit">
           <DrawerHeader>
             <DrawerTitle
               className={
-                "font-link-sans font-black text-[clamp(28px,8vmin,56px)] tracking-tight leading-[1.05] text-left text-[#1E2330]"
+                "font-link-sans font-black text-center text-[clamp(28px,8vmin,56px)] tracking-tight leading-[1.05] lg:text-left text-[#1E2330]"
               }
             >
               {title}
             </DrawerTitle>
             <DrawerDescription>{description}</DrawerDescription>
-            <Button className="rounded-full max-w-32" onClick={onCreate}>
-              Create One{" "}
-            </Button>
+            <div className="flex items-center w-full justify-center lg:justify-start">
+              <Button
+                className="rounded-lg w-full h-[3rem] max-w-[12rem]"
+                onClick={onCreate}
+              >
+                Create One{" "}
+              </Button>
+            </div>
           </DrawerHeader>
-          <div className="p-4 pb-0">{content}</div>
+          <div className="p-4 flex items-center justify-center">{content}</div>
           {/* <DrawerFooter>
             <Button>Submit</Button>
             <DrawerClose asChild>
