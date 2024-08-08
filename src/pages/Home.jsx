@@ -23,7 +23,7 @@ const Home = () => {
   console.log("searchParams", open);
 
   return (
-    <div className="w-full max-w-screen h-full px-[1rem] lg:px-[3rem] flex flex-col items-center overflow-y-auto pb-[2rem]">
+    <div className="w-full max-w-screen h-full px-[1rem] lg:px-[3rem] flex flex-col items-center pb-[2rem]">
       <header
         id="header"
         className="sticky top-[2rem] w-full h-[3.7rem] flex items-center justify-end px-6 py-2

@@ -1,12 +1,11 @@
-import card1 from "../assets/41.png";
-import card2 from "../assets/new1.png";
-import card3 from "../assets/new2.png";
-import card4 from "../assets/image4.png";
-import card5 from "../assets/image2.png";
-import card6 from "../assets/Mockup_ 1.png";
-import card7 from "../assets/newmockup1.png";
-import card8 from "../assets/newmock2.png";
-import card9 from "../assets/newmockup3.png";
+import card1 from "../assets/new/newMockup01.png";
+import card2 from "../assets/new/newMockup02.png";
+import card3 from "../assets/new/newMockup03.png";
+import card4 from "../assets/new/newMockup04.png";
+import card5 from "../assets/new/newmockup3.png";
+import card6 from "../assets/new/newmockup3.png";
+import card7 from "../assets/new/newmockup1.png";
+import card8 from "../assets/new/newmock2.png";
 
 export let mockupData = [
   {
@@ -66,19 +65,11 @@ export let mockupData = [
       "Designed for artists and creatives to showcase their portfolios, share their creative process, and sell their artworks.",
   },
   {
-    title: "The Business Guru Template",
+    title: "The Creative Mind Template",
     image: card8,
     link: "/template/8",
     id: 8,
     description:
-      "Ideal for business coaches and consultants to offer services, share industry insights, and post client testimonials.",
-  },
-  {
-    title: "The Lifestyle Guru Template",
-    image: card9,
-    link: "/template/9",
-    id: 9,
-    description:
-      "A versatile template for lifestyle bloggers to share daily tips, personal stories, and lifestyle hacks.",
+      "Designed for artists and creatives to showcase their portfolios, share their creative process, and sell their artworks.",
   },
 ];
