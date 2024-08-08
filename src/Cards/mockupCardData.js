@@ -3,9 +3,10 @@ import card2 from "../assets/new/newMockup02.png";
 import card3 from "../assets/new/newMockup03.png";
 import card4 from "../assets/new/newMockup04.png";
 import card5 from "../assets/new/newmockup3.png";
-import card6 from "../assets/new/newmockup3.png";
+import card6 from "../assets/new/mockupGlaxy.png";
 import card7 from "../assets/new/newmockup1.png";
 import card8 from "../assets/new/newmock2.png";
+
 
 export let mockupData = [
   {
@@ -72,4 +73,6 @@ export let mockupData = [
     description:
       "Designed for artists and creatives to showcase their portfolios, share their creative process, and sell their artworks.",
   },
+ 
+
 ];
