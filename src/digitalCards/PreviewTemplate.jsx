@@ -13,7 +13,7 @@ const PreviewTemplate = ({ data, cardId, customClass }) => {
     );
   }
   return (
-    <div className={`flex ${customClass}`}>
+    <div className={`flex justify-center ${customClass}`}>
       <PreviewCard data={data} isPreview={true} />
     </div>
   );
