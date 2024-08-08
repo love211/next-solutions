@@ -6,6 +6,8 @@ import card5 from "../assets/new/newmockup3.png";
 import card6 from "../assets/new/mockupGlaxy.png";
 import card7 from "../assets/new/newmockup1.png";
 import card8 from "../assets/new/newmock2.png";
+import card9 from "../assets/new/mockUp02.png";
+import card10 from "../assets/new/mockUp01.png";
 
 
 export let mockupData = [
@@ -70,6 +72,22 @@ export let mockupData = [
     image: card8,
     link: "/template/8",
     id: 8,
+    description:
+      "Designed for artists and creatives to showcase their portfolios, share their creative process, and sell their artworks.",
+  },
+  {
+    title: "The Template",
+    image: card9,
+    link: "/template/8",
+    id: 9,
+    description:
+      "Designed for artists and creatives to showcase their portfolios, share their creative process, and sell their artworks.",
+  },
+  {
+    title: "The Template of creation",
+    image: card10,
+    link: "/template/8",
+    id: 10,
     description:
       "Designed for artists and creatives to showcase their portfolios, share their creative process, and sell their artworks.",
   },

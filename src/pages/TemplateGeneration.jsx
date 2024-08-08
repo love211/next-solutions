@@ -41,7 +41,8 @@ const TemplateGeneration = () => {
     <div className="flex justify-center items-center w-screen h-[100vh] px-2 py-2">
       <div className="flex overflow-y-scroll h-full w-full gap-4">
         <SideBar />
-        <div className="flex flex-grow px-4 justify-between">
+        <div className="flex flex-col px-4 justify-between">
+          
           <TemplateForm className="w-full rounded-3xl bg-white p-4 h-fit" />
         </div>
         <div className="sticky top-0">
