@@ -9,6 +9,7 @@ import { parseDocument } from "htmlparser2";
 import apiService from "@/api/axios";
 import { apiEndpoints } from "@/api/apiEndPoint";
 import { useSelector } from "react-redux";
+import { IoClose } from "react-icons/io5";
 
 let headerObj = {
   title: "",
@@ -70,22 +71,27 @@ const Links = () => {
           Add Links
         </button>
       ) : (
-        <div className="flex items-center gap-2">
-          <div className="flex flex-col gap-2 w-[80%]">
-            <Input
-              type="text"
-              name="url"
-              id="url"
-              placeholder="URL"
-              onChange={(e) => setUrlState(e.target.value)}
-            />
+        <div className="w-full h-fit py-[1rem] px-3 flex flex-col gap-[0.75rem] bg-white rounded-xl animation-height">
+          <div className="w-full h-[2rem] flex justify-end">
+            <IoClose className="w-5 h-5" />
           </div>
-          <Button
-            className="bg-primary rounded-2xl w-[20%]"
-            onClick={handleLinkSave}
-          >
-            Add
-          </Button>
+          <div className="flex items-center gap-2">
+            <div className="flex flex-col gap-2 w-[80%]">
+              <Input
+                type="text"
+                name="url"
+                id="url"
+                placeholder="URL"
+                onChange={(e) => setUrlState(e.target.value)}
+              />
+            </div>
+            <Button
+              className="bg-primary rounded-xl w-[20%]"
+              onClick={handleLinkSave}
+            >
+              Add
+            </Button>
+          </div>
         </div>
       )}
       <div className="flex items-center space-x-4 p-4 justify-between">
