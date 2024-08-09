@@ -17,82 +17,68 @@ import apiService from "@/api/axios";
 import { apiEndpoints } from "@/api/apiEndPoint";
 import { useSelector } from "react-redux";
 
+let headerObj = {
+  title: "",
+};
 const Links = () => {
   const [open, setOpen] = useState(false);
   const [urlState, setUrlState] = useState("");
   const [linksData, setLinkData] = useState([]);
   const { userDetails, loading } = useSelector((state) => state.template);
+  const [headerData, setHeaderData] = useState([]);
+
+  useEffect(() => {
+    if (userDetails?.header?.length > 0) {
+      setHeaderData(userDetails?.header);
+    }
+  }, [userDetails.header]);
+  console.log("userDetails", userDetails);
 
   const handleLinkSave = async () => {
     const response = await apiService.patch(
-      `${apiEndpoints.addLink}/${userDetails.id}`,
+      `${apiEndpoints.addLink}/${userDetails?.id}`,
       {
-        weblinks: [urlState],
+        weblinks: { url: [urlState] },
       }
     );
     console.log("response", response);
-    // setLinkData((prev) => [
-    //   ...prev,
-    //   {
-    //     link: urlState,
-    //     title: "Hire Remote Developers | 1 on 1 Hiring Support with UpStack®",
-    //   },
-    // ]);
+
     setOpen(false);
   };
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [error, setError] = useState("");
-
-  const fetchMetadata = async () => {
-    try {
-      const response = await fetch(`https://deeporion.com/`);
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      const data = await response.json();
-      const htmlText = data.contents;
-      const doc = parseDocument(htmlText);
-      const titleElement = doc.querySelector("title");
-      const descriptionElement = doc.querySelector('meta[name="description"]');
-
-      setTitle(titleElement ? titleElement.textContent : "No title found");
-      setDescription(
-        descriptionElement
-          ? descriptionElement.attribs.content
-          : "No description found"
-      );
-    } catch (error) {
-      setError(error.message);
-    }
+  const addHeaderHandler = () => {
+    setHeaderData((prev, index) => [...prev, { ...headerObj, id: index + 1 }]);
   };
-
-  // useEffect(() => {
-  //   fetchMetadata();
-  // }, []);
-
+  const submitHeaderHandler = async (title) => {
+    setHeaderData((prev) => prev.map((a) => ({ ...a, title: title })));
+    if (editId) {
+      const response = apiService.patch(apiEndpoints.editHeader(editCardId), {
+        _id: "66b5c865171e9ef2259873ff",
+        title: "software development",
+        description: "jpjfdn",
+      });
+    }
+    const response = await apiService.patch(
+      `${apiEndpoints.addHeader}/${userDetails?.id}`,
+      {
+        content: headerData.map((data) => ({
+          title: title,
+          description: "yrd",
+        })),
+      }
+    );
+    console.log("responseHeader", response);
+  };
   console.log("linksData", linksData);
   return (
     <div className="flex flex-col gap-2 px-4 w-[90%]">
-      <button
-        className="w-full min-h-[48px] bg-primary text-white rounded-3xl"
-        onClick={() => setOpen(true)}
-      >
-        Add Links
-      </button>
-      <div className="flex items-center space-x-4 p-4 justify-between">
-        {/* Add header button */}
-        <AddHeader />
-
-        {/* View archive link */}
-        <Archive />
-      </div>
-      {/* <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Enter URL</DialogTitle>
-          </DialogHeader> */}
-      {open && (
+      {!open ? (
+        <button
+          className="w-full min-h-[48px] bg-primary text-white rounded-3xl"
+          onClick={() => setOpen(true)}
+        >
+          Add Links
+        </button>
+      ) : (
         <div className="flex items-center gap-2">
           <div className="flex flex-col gap-2 w-[80%]">
             <Input
@@ -111,10 +97,27 @@ const Links = () => {
           </Button>
         </div>
       )}
+      <div className="flex items-center space-x-4 p-4 justify-between">
+        {/* Add header button */}
+        <AddHeader onClick={addHeaderHandler} />
+
+        {/* View archive link */}
+        <Archive />
+      </div>
+      {/* <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Enter URL</DialogTitle>
+          </DialogHeader> */}
+
       {/* </DialogContent>
       </Dialog> */}
-      <LinkCard isHeadlineCard onSave />
-      <LinkCard />
+      {headerData.map((head) => (
+        <LinkCard isHeadlineCard onSave={submitHeaderHandler} value={head} />
+      ))}
+      {userDetails?.weblink?.map((link) => (
+        <LinkCard key={link._id} value={link} />
+      ))}
     </div>
   );
 };

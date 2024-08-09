@@ -20,37 +20,32 @@ import {
 import { Trash } from "lucide-react";
 
 const LinkCard = ({ value, onSave, isHeadlineCard = false }) => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [headerContent, setHeaderContent] = useState(
-    "Custom software development & website design servi..."
-  );
-  const [urlLink, setUrlLink] = useState("http://next-solutions.com");
-
-  //   const handleUrl = (e) => setUrlLink(e.target.value);
-  //   const onLinkSave = (value) => setUrlLink(value);
   return (
-    <Card className="flex flex-col shadow-lg rounded-ee-3xl">
-      <div className="flex "></div>
-      <CardHeader className="flex flex-row items-center justify-between gap-1">
-        <EditableText onSave={onSave} value={value} />
-        <div>
+    <Card className="w-full py-3 flex flex-col gap-[0.5rem] shadow-lg rounded-2xl">
+      <div className="w-full flex items-center justify-between">
+        <div className="w-full flex flex-col ">
+          <CardHeader className="flex flex-row items-center justify-between gap-1">
+            <EditableText onSave={onSave} value={value?.title || ""} />
+          </CardHeader>
+          {!isHeadlineCard && (
+            <CardContent className="flex justify-start gap-1 items-center">
+              <EditableText onSave={onSave} value={value.url || ""} />
+            </CardContent>
+          )}
+        </div>
+        <div className="px-2">
           <Switch />
         </div>
-      </CardHeader>
-      {!isHeadlineCard && (
-        <CardContent className="flex justify-start gap-1 items-center">
-          <EditableText onSave={onSave} value={urlLink} />
-        </CardContent>
-      )}
+      </div>
 
       <CardFooter
-        className={`flex ${
+        className={`w-full h-fit items-center flex ${
           !isHeadlineCard ? "justify-between" : "justify-end"
         } items-center h-fit`}
       >
         {!isHeadlineCard ? (
-          <>
-            <div className="flex space-x-3">
+          <div className="w-full h-full flex items-center justify-between gap-[0.75rem]">
+            <div className="w-full flex items-center justify-start gap-[0.75rem]">
               <Button variant="ghost" size="icon">
                 <FaSearch />
               </Button>
@@ -67,17 +62,17 @@ const LinkCard = ({ value, onSave, isHeadlineCard = false }) => {
                 <FaChartBar />
               </Button>
             </div>
-            <div className="flex items-center space-x-2">
+            <div className="w-full flex items-center justify-end gap-[0.75rem]">
               <Button variant="ghost" size="icon">
-                <FaShareAlt />
+                <FaShareAlt className="fill-blue-800" />
               </Button>
               <Button variant="ghost" size="icon">
-                <FaTrash />
+                <FaTrash className="fill-red-500" />
               </Button>
             </div>
-          </>
+          </div>
         ) : (
-          <div className="flex items-center justify-end space-x-2">
+          <div className="w-fit min-w-fit flex items-center justify-end">
             <Button variant="ghost" size="icon">
               <FaTrash />
             </Button>

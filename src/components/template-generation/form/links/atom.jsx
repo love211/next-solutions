@@ -21,15 +21,18 @@ const EditableText = ({ value, onSave }) => {
   };
 
   return (
-    <div className="flex items-center">
+    <div className="flex w-full h-full justify-start gap-2 items-center">
       {isEditing ? (
         <Input
           value={linkData}
           onChange={handleInputChange}
           className="flex-grow"
+          placeHolder="Headline title"
         />
       ) : (
-        <span className="font-semibold">{value}</span>
+        <p className={`font-semibold ${!value && "text-gray-600"}`}>
+          {value || "Headline title"}
+        </p>
       )}
       <Button
         variant="ghost"
