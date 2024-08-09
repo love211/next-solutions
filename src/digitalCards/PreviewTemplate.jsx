@@ -6,14 +6,14 @@ const PreviewTemplate = ({ data, cardId, customClass }) => {
   const PreviewCard = cardToRender[cardId];
   if (!PreviewCard) {
     return (
-      <div>
+      <div className={customClass}>
         {" "}
         <NoData />
       </div>
     );
   }
   return (
-    <div className={`flex ${customClass}`}>
+    <div className={`flex justify-center ${customClass}`}>
       <PreviewCard data={data} isPreview={true} />
     </div>
   );

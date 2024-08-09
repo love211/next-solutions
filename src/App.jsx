@@ -7,7 +7,7 @@ import RoutesProvider from "./routes";
 function App() {
   const { isInitialized } = useAuth();
   return (
-    <div className="w-full h-full flex items-center flex-col main-bg bg-white">
+    <div className="w-full h-full flex items-center flex-col bg-[#F3F3F1]">
       {isInitialized ? <RoutesProvider /> : <Loading />}
     </div>
   );

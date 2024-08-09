@@ -7,6 +7,10 @@ import SignUpPage from "../pages/auth/SignUp";
 import PrivateLayout from "../layout/PrivateLayout";
 import UserCards from "@/pages/UserCards";
 import GuestGuard from "@/auth/GuestGuard";
+import PersonalInfo from "@/components/template-generation/form/PersonalInfo";
+import Appearance from "@/components/template-generation/form/Appearance";
+import TemplateGenerationLayout from "@/layout/template-form/TemplateGenerationLayout";
+import Links from "@/components/template-generation/form/Links";
 
 const RoutesProvider = () => (
   <Routes>
@@ -28,8 +32,30 @@ const RoutesProvider = () => (
         </AuthGuard>
       }
     >
-      <Route path="/template/:1" element={<Template />} />
+      {/* <Route path="/template/:1" element={<Template />} /> */}
       <Route path="/user-generated-cards/" element={<UserCards />} />
+      <Route
+        path="/template/:templatename/form"
+        element={
+          <TemplateGenerationLayout>
+            {" "}
+            <PersonalInfo />{" "}
+          </TemplateGenerationLayout>
+        }
+      >
+        <Route
+          path="/template/:templatename/form/personal-info"
+          element={<PersonalInfo />}
+        />
+        <Route
+          path="/template/:templatename/form/links"
+          element={<Links />}
+        />
+        <Route
+          path="/template/:templatename/form/appearance"
+          element={<Appearance />}
+        />
+      </Route>
     </Route>
   </Routes>
 );

@@ -7,6 +7,7 @@ import useAuth from "../../auth/useAuth";
 import { toast } from "react-toastify";
 
 import GoogleLogin from "./GoogleLogin";
+import LinkedInLogin from "./LinkedInLogin";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -149,6 +150,7 @@ const LoginPage = () => {
           </div> */}
           {/* <GoogleLoginButton /> */}
           <GoogleLogin />
+          <LinkedInLogin />
         </div>
       </div>
     </div>
