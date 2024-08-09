@@ -7,22 +7,34 @@ import { RiColorFilterLine } from "react-icons/ri";
 import { useLocation, useNavigate } from "react-router";
 
 export let sideBarItemsData = [
-  { icon: BsFileEarmarkPerson, label: "Personal", link: PATH.templateForm.personalInfo },
+  {
+    icon: BsFileEarmarkPerson,
+    label: "Personal",
+    link: PATH.templateForm.personalInfo,
+  },
   { icon: FaLink, label: "Links", link: PATH.templateForm.links },
   { icon: FaConnectdevelop, label: "Social", link: "/shop" },
-  { icon: RiColorFilterLine, label: "Appearance", link: PATH.templateForm.appearance },
+  {
+    icon: RiColorFilterLine,
+    label: "Appearance",
+    link: PATH.templateForm.appearance,
+  },
   { icon: IoAnalytics, label: "analytics", link: "/analytics" },
 ];
 const SidebarItem = ({ icon: Icon, label, active, onNavigate }) => (
-  <div
-    className={`w-full flex items-center gap-2 px-4 h-[2.5rem] relative`}
-  >
-    <div className={`w-full h-full flex items-center justify-start rounded-xl px-3 gap-[0.75rem] ${
-      active ? " bg-gray-200 text-purple-600 before:w-[0.25rem] before:absolute before:" : "hover:bg-gray-100"
-    }`}>
+  <div className={`w-full flex items-center gap-2 px-4 h-[2.5rem] relative`}>
+    <div
+      className={`w-full h-full flex items-center justify-start rounded-xl px-3 gap-[0.75rem] ${
+        active
+          ? " bg-gray-200 text-purple-600 before:w-[0.25rem] before:absolute before:"
+          : "hover:bg-gray-100"
+      }`}
+    >
       <Icon className="w-5 h-5" />
       <p
-        className={`text-sm cursor-pointer capitalize ${active ? "font-bold text-base" : ""}`}
+        className={`text-sm cursor-pointer capitalize ${
+          active ? "font-bold text-base" : ""
+        }`}
         onClick={onNavigate}
       >
         {label}
@@ -53,6 +65,7 @@ export default function SideBar() {
         {sideBarItemsData.map((item) => {
           return (
             <SidebarItem
+              key={item.label}
               icon={item.icon}
               label={item.label}
               active={location.pathname === basePath + item.link}

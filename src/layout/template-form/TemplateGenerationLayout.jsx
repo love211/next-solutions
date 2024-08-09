@@ -39,6 +39,7 @@ const TemplateGenerationLayout = () => {
           <div className="w-full h-fit px-2 py-2 flex justify-between bg-white">
             {sideBarItemsData.map((item) => (
               <button
+                key={item.label}
                 className="w-fit flex flex-col items-center gap-[0.25rem]"
                 onNavigate={() => onNavigate(item.link)}
               >

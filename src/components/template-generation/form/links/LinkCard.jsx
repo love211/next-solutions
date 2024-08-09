@@ -19,22 +19,36 @@ import {
 } from "react-icons/fa";
 import { Trash } from "lucide-react";
 
-const LinkCard = ({ value, onSave, isHeadlineCard = false }) => {
+const LinkCard = ({
+  value,
+  onSave,
+  onVisiblityToggle,
+  isHeadlineCard = false,
+}) => {
+  // console.log("onSave", onSave);
   return (
     <Card className="w-full py-3 flex flex-col gap-[0.5rem] shadow-lg rounded-2xl">
       <div className="w-full flex items-center justify-between">
         <div className="w-full flex flex-col ">
           <CardHeader className="flex flex-row items-center justify-between gap-1">
-            <EditableText onSave={onSave} value={value?.title || ""} />
+            <EditableText
+              onSave={onSave}
+              value={value}
+              name="title"
+              key={value._id}
+            />
           </CardHeader>
           {!isHeadlineCard && (
             <CardContent className="flex justify-start gap-1 items-center">
-              <EditableText onSave={onSave} value={value.url || ""} />
+              <EditableText onSave={onSave} value={value} name="url" />
             </CardContent>
           )}
         </div>
         <div className="px-2">
-          <Switch />
+          <Switch
+            checked={value?.visibility}
+            onCheckedChange={onVisiblityToggle}
+          />
         </div>
       </div>
 

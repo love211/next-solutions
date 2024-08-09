@@ -1,11 +1,4 @@
-import DrawerWrapper from "@/components/custom-ui/DrawerWrapper";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 
 import { useEffect, useState } from "react";
@@ -25,14 +18,6 @@ const Links = () => {
   const [urlState, setUrlState] = useState("");
   const [linksData, setLinkData] = useState([]);
   const { userDetails, loading } = useSelector((state) => state.template);
-  const [headerData, setHeaderData] = useState([]);
-
-  useEffect(() => {
-    if (userDetails?.header?.length > 0) {
-      setHeaderData(userDetails?.header);
-    }
-  }, [userDetails.header]);
-  console.log("userDetails", userDetails);
 
   const handleLinkSave = async () => {
     const response = await apiService.patch(
@@ -41,33 +26,39 @@ const Links = () => {
         weblinks: { url: [urlState] },
       }
     );
-    console.log("response", response);
 
     setOpen(false);
   };
-  const addHeaderHandler = () => {
-    setHeaderData((prev, index) => [...prev, { ...headerObj, id: index + 1 }]);
-  };
-  const submitHeaderHandler = async (title) => {
-    setHeaderData((prev) => prev.map((a) => ({ ...a, title: title })));
-    if (editId) {
-      const response = apiService.patch(apiEndpoints.editHeader(editCardId), {
-        _id: "66b5c865171e9ef2259873ff",
-        title: "software development",
-        description: "jpjfdn",
-      });
-    }
+
+  const linkEditHandler = () => {};
+  const addHeaderHandler = async () => {
     const response = await apiService.patch(
-      `${apiEndpoints.addHeader}/${userDetails?.id}`,
+      apiEndpoints?.addHeader(userDetails?.id),
       {
-        content: headerData.map((data) => ({
-          title: title,
-          description: "yrd",
-        })),
+        title: "",
+        description: "",
       }
     );
-    console.log("responseHeader", response);
+    console.log("response", response);
   };
+
+  const submitHeaderHandler = async ({ data, id }) => {
+    console.log("aaya", data, id);
+    try {
+      if (id) {
+        const response = await apiService.patch(apiEndpoints?.editHeader(id), {
+          _id: id,
+          title: data,
+          description: "jpjfdn",
+        });
+        console.log("responseHeader", response);
+      }
+    } catch (error) {
+      throw new Error("validation");
+      console.log("error", error);
+    }
+  };
+  const cardVisiblityHandler = async (value) => {};
   console.log("linksData", linksData);
   return (
     <div className="flex flex-col gap-2 px-4 w-[90%]">
@@ -98,25 +89,24 @@ const Links = () => {
         </div>
       )}
       <div className="flex items-center space-x-4 p-4 justify-between">
-        {/* Add header button */}
         <AddHeader onClick={addHeaderHandler} />
-
-        {/* View archive link */}
         <Archive />
       </div>
-      {/* <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Enter URL</DialogTitle>
-          </DialogHeader> */}
-
-      {/* </DialogContent>
-      </Dialog> */}
-      {headerData.map((head) => (
-        <LinkCard isHeadlineCard onSave={submitHeaderHandler} value={head} />
+      {userDetails?.header?.map((head) => (
+        <LinkCard
+          isHeadlineCard
+          onSave={submitHeaderHandler}
+          value={head}
+          key={head._id}
+        />
       ))}
       {userDetails?.weblink?.map((link) => (
-        <LinkCard key={link._id} value={link} />
+        <LinkCard
+          key={link._id}
+          value={link}
+          onSave={linkEditHandler}
+          onVisiblityToggle={cardVisiblityHandler}
+        />
       ))}
     </div>
   );

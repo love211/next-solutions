@@ -1,27 +1,51 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { PencilIcon, SaveIcon } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaAngleRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-const EditableText = ({ value, onSave }) => {
+const EditableText = ({ value, name, onSave }) => {
+  const inputRef = useRef(null);
   const [isEditing, setIsEditing] = useState(false);
-  const [linkData, setLinkData] = useState(value);
+  const [linkData, setLinkData] = useState(value[name]);
+
   const handleEditClick = () => {
     setIsEditing(true);
   };
 
-  const handleSaveClick = () => {
-    onSave(linkData);
+  const handleSaveClick = async () => {
+    try {
+      await onSave({ data: linkData, id: value._id });
+      setIsEditing(false);
+    } catch (error) {
+      console.log("error", error);
+    }
   };
 
   const handleInputChange = (e) => {
     setLinkData(e.target.value);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (inputRef.current && !inputRef.current.contains(event.target)) {
+        setIsEditing(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [inputRef]);
+
   return (
-    <div className="flex w-full h-full justify-start gap-2 items-center">
+    <div
+      className="flex w-full h-full justify-start gap-2 items-center"
+      ref={inputRef}
+    >
       {isEditing ? (
         <Input
           value={linkData}
@@ -30,8 +54,8 @@ const EditableText = ({ value, onSave }) => {
           placeHolder="Headline title"
         />
       ) : (
-        <p className={`font-semibold ${!value && "text-gray-600"}`}>
-          {value || "Headline title"}
+        <p className={`font-semibold ${!value.title && "text-gray-600"}`}>
+          {value[name] || "Headline title"}
         </p>
       )}
       <Button
@@ -58,7 +82,7 @@ export const AddHeader = ({ ...buttonProps }) => {
       {...buttonProps}
     >
       <svg
-        class="mr-xs"
+        className="mr-xs"
         width="16"
         height="16"
         viewBox="0 0 16 16"
@@ -66,8 +90,8 @@ export const AddHeader = ({ ...buttonProps }) => {
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M0.5 -0.000244141H0V0.999755L0.5 0.999756L15.4999 0.999775L15.9999 0.999776L15.9999 -0.000224382L15.4999 -0.000225008L0.5 -0.000244141ZM0.500074 3.99976L7.37309e-05 4.49975L0 15.4998L0.5 15.9998H15.5L16 15.4998V4.49977L15.5 3.99977L0.500074 3.99976ZM1 14.9998L1.00007 4.99976L15 4.99977V14.9998H1Z"
           fill="black"
         ></path>

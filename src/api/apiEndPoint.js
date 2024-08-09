@@ -6,7 +6,10 @@ export const apiEndpoints = {
   createTemplate: "template/create",
   personalInfo: "/template/create_personal",
   addLink: "template/addWeblinks",
-  addHeader: "template/addContent",
+  addHeader: (id) => {
+    `template/addContent/${id}`;
+  },
   editHeader: (id) => `template/editContent/${id}`,
+  archieve: (id) => `template/archiveStatus/${id}`,
   getTemplate: "template/user",
 };
