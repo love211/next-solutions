@@ -62,10 +62,10 @@ const Links = () => {
   const cardVisiblityHandler = async (value) => {};
   console.log("linksData", linksData);
   return (
-    <div className="flex flex-col gap-2 px-4 w-[90%]">
+    <div className="w-full flex flex-col gap-2">
       {!open ? (
         <button
-          className="w-full min-h-[48px] bg-primary text-white rounded-3xl"
+          className="w-full min-h-[48px] bg-primary text-white rounded-xl"
           onClick={() => setOpen(true)}
         >
           Add Links

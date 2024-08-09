@@ -29,13 +29,13 @@ const SidebarItem = ({ icon: Icon, label, active, onNavigate }) => (
           ? " bg-gray-200 text-purple-600 before:w-[0.25rem] before:absolute before:"
           : "hover:bg-gray-100"
       }`}
+      onClick={onNavigate}
     >
       <Icon className="w-5 h-5" />
       <p
         className={`text-sm cursor-pointer capitalize ${
           active ? "font-bold text-base" : ""
         }`}
-        onClick={onNavigate}
       >
         {label}
       </p>

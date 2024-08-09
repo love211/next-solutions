@@ -22,7 +22,7 @@ const TemplateGenerationLayout = () => {
 
   return (
     <div className="w-screen flex">
-      <div className="w-fit h-full max-h-screen hidden lg:flex sticky top-2 left-2">
+      <div className="w-fit h-full max-h-screen hidden lg:flex sticky top-0 py-2 px-2">
         <SideBar />
       </div>
       <div className="lg:basis-[55%] w-full flex flex-col items-center gap-[1rem] lg:px-4 justify-between border-r-2 py-2">
@@ -49,7 +49,7 @@ const TemplateGenerationLayout = () => {
             ))}
           </div>
         </div>
-        <div className="w-full px-6 flex flex-col gap-[1rem]">
+        <div className="w-full px-5 flex flex-col gap-[1rem]">
           {/* Card */}
           <div className="w-full h-[12rem] px-6 py-6 flex items-center gap-[1rem] bg-[#264f1a] rounded-[1.5rem]">
             <div className="w-full h-full flex flex-col items-center lg:items-center justify-between gap-[1rem]">
