@@ -112,3 +112,18 @@ body {
 [vaul-drawer][vaul-drawer-direction=bottom]::after{
   height: auto!important;
 }
+
+.animation-height {
+  max-height: 0;
+  overflow-y: hidden; /* Hide the overflow content */
+  animation: draw 300ms linear 100ms forwards; /* Animation settings */
+}
+
+@keyframes draw {
+  0% {
+    max-height: 0%; 
+  }
+  100% {
+    max-height: 100%; 
+  }
+}

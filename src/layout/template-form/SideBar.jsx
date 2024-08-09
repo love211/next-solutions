@@ -19,11 +19,12 @@ const SidebarItem = ({ icon: Icon, label, active, onNavigate }) => (
   >
     <div className={`w-full h-full flex items-center justify-start rounded-xl px-3 gap-[0.75rem] ${
       active ? " bg-gray-200 text-purple-600 before:w-[0.25rem] before:absolute before:" : "hover:bg-gray-100"
-    }`}>
+    }`}
+    onClick={onNavigate}
+    >
       <Icon className="w-5 h-5" />
       <p
         className={`text-sm cursor-pointer capitalize ${active ? "font-bold text-base" : ""}`}
-        onClick={onNavigate}
       >
         {label}
       </p>
@@ -43,7 +44,7 @@ export default function SideBar() {
   const onNavigate = (link) =>
     navigate(basePath + link, { state: location.state });
   return (
-    <div className="flex flex-col w-[14rem] h-[calc(100vh-1.3rem)] py-8 bg-white rounded-3xl shadow-[0_0_10px_0_rgba(0,0,0,0.2)]">
+    <div className="flex flex-col w-[14rem] h-[calc(100vh-1.3rem)] justify-start py-8 bg-white rounded-3xl shadow-[0_0_10px_0_rgba(0,0,0,0.2)]">
       {/* Sidebar content here */}
       <div className="w-full px-4 flex items-start">
         <h2 className="text-lg font-bold mb-4 bg-white">Sidebar</h2>
