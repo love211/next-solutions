@@ -11,38 +11,26 @@ import useAuth from "@/auth/useAuth";
 import { toast } from "react-toastify";
 import parsePhoneNumberFromString from "libphonenumber-js";
 import { cn } from "@/lib/utils";
+import { useSelector } from "react-redux";
 
-function removeCountryCode(phoneNumber) {
-  // Check if the phone number starts with a country code '+'
-  if (phoneNumber.startsWith("+")) {
-    // Remove the first three characters
-    return phoneNumber.substring(3);
-  } else {
-    // If the phone number does not start with '+', return it as is
-    return phoneNumber;
-  }
-}
-function getUrl(url) {
-  let protocol = "https://";
-  if (url.includes(".")) {
-    return protocol + url;
-  }
-  return protocol + url + ".com";
-}
 const TemplateForm = ({ className, onClose, setPreview, isPreview }) => {
   const { user } = useAuth();
   const cardId = useParams();
+  const location = useLocation();
+  const { userDetails } = useSelector((state) => state.template);
   const [profilePhoto, setProfilePhoto] = useState(null);
   const [preview, setPreviewImage] = useState(null);
+  let isEdit = userDetails && Object.keys(userDetails).length > 0;
   const formik = useFormik({
     initialValues: {
-      name: "abc@example.com",
-      designation: "abcc",
-      company: "xyzz",
-      about: "xyzz",
-      phone: "xyzz",
-      email: "xyzz",
-      weblink: "xyzz",
+      name: userDetails.name ?? "",
+      designation: userDetails.designation ?? "",
+      company: userDetails.company ?? "",
+      about: userDetails.about ?? "",
+      phone: userDetails?.phone
+        ? `+${userDetails.countryCode}${userDetails.phone}`
+        : "",
+      email: userDetails.email ?? "",
     },
     validationSchema: Yup.object({
       name: Yup.string().required("Name is required"),
@@ -63,46 +51,47 @@ const TemplateForm = ({ className, onClose, setPreview, isPreview }) => {
       email: Yup.string()
         .email("Invalid email address")
         .required("Email is required"),
-      weblink: Yup.string().required("Web link is required"),
     }),
     onSubmit: async (values, { setSubmitting }) => {
       try {
-        if (!isPreview) {
-          setPreview(values);
+        setSubmitting(true);
+        const parsedNumber = parsePhoneNumberFromString(values.phone);
+        if (isEdit) {
+          const response = await apiService.patch(apiEndpoints.personalInfo, {
+            name: values.name,
+            designation: values.designation,
+            company: values.company,
+            about_me: values.about,
+            country_code: parsedNumber.countryCallingCode,
+            phone: parsedNumber.nationalNumber,
+            user_id: user.id,
+            template_id: location?.state?.data,
+            email: values.email,
+          });
+          setSubmitting(false);
+          toast.success("Data updated successfully");
+        } else {
+          const response = await apiService.post(apiEndpoints.personalInfo, {
+            name: values.name,
+            designation: values.designation,
+            company: values.company,
+            about_me: values.about,
+            country_code: parsedNumber.countryCallingCode,
+            phone: parsedNumber.nationalNumber,
+            user_id: user.id,
+            template_id: location?.state?.data,
+            email: values.email,
+          });
+          setSubmitting(false);
+          toast.success("Data added successfully");
         }
-        if (isPreview) {
-          handleConfirm();
-        }
+        // onClose();
       } catch (error) {
+        console.log("error", error);
         setSubmitting(false);
       }
     },
   });
-
-  const handleConfirm = async () => {
-    const { values, setSubmitting } = formik;
-    try {
-      setSubmitting(true);
-      const response = await apiService.post(apiEndpoints.createTemplate, {
-        data: {
-          user_id: user.id,
-          template_id: +cardId[1],
-          name: values.name,
-          email: values.email,
-          company: values.company,
-          designation: values.designation,
-          phone: removeCountryCode(values.phone),
-          weblinks: getUrl(values.weblink),
-          about_me: values.about,
-        },
-      });
-      setSubmitting(false);
-      toast.success("Data added successfully");
-      onClose();
-    } catch (error) {
-      setSubmitting(false);
-    }
-  };
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -114,6 +103,13 @@ const TemplateForm = ({ className, onClose, setPreview, isPreview }) => {
       };
       reader.readAsDataURL(file);
     }
+  };
+
+  const getButtonTitle = () => {
+    if (isEdit) {
+      return formik.isSubmitting ? "Editing..." : "Edit";
+    }
+    return formik.isSubmitting ? "Saving..." : "Save";
   };
   return (
     <FormikProvider value={formik.values}>
@@ -194,23 +190,8 @@ const TemplateForm = ({ className, onClose, setPreview, isPreview }) => {
               <div className="text-red-500">{formik.errors.email}</div>
             ) : null}
           </div>
-
-          {/* <div className="flex flex-col gap-2">
-            <Label htmlFor="weblink">Web Links</Label>
-            <Input id="weblink" {...formik.getFieldProps("weblink")} />
-            {formik.touched.weblink && formik.errors.weblink ? (
-              <div className="text-red-500">{formik.errors.weblink}</div>
-            ) : null}
-          </div> */}
-
           <div className="flex justify-center">
-            <Button type="submit">
-              {formik.isSubmitting
-                ? "Saving..."
-                : isPreview
-                ? "Save"
-                : "Preview"}
-            </Button>
+            <Button type="submit">{getButtonTitle()}</Button>
           </div>
         </Form>
       </div>

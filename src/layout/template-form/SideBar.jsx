@@ -6,7 +6,7 @@ import { IoAnalytics } from "react-icons/io5";
 import { RiColorFilterLine } from "react-icons/ri";
 import { useLocation, useNavigate } from "react-router";
 
-let sideBarItemsData = [
+export let sideBarItemsData = [
   { icon: BsFileEarmarkPerson, label: "Personal", link: PATH.templateForm.personalInfo },
   { icon: FaLink, label: "Links", link: PATH.templateForm.links },
   { icon: FaConnectdevelop, label: "Social", link: "/shop" },

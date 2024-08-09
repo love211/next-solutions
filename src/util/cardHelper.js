@@ -25,3 +25,22 @@ export const convertCardData = (apiResponse) => {
     templateId: api.template_id,
   }));
 };
+
+export const convertUserCardData = (apiResponse) => {
+  return apiResponse.map((api) => ({
+    id: api.id,
+    profilePic: api.profile_picture,
+    name: api.name,
+    designation: api.designation,
+    company: api.company,
+    about: api.about_me, // Mapping 'about_me' to 'about'
+    countryCode: api.country_code,
+    phone: api.phone,
+    email: api.email,
+    templateId: api.template_id,
+    weblink: api.weblinks, // Mapping 'weblinks' to 'weblink'
+    header: api.contents,
+    socialLinks: api.social_links,
+    bgImage: api.bg_image,
+  }))[0];
+};
